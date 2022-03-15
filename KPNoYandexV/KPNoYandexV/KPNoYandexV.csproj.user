@@ -7,6 +7,26 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\Actors.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Films.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\Genres.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="View\Actors.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Films.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\Genres.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
