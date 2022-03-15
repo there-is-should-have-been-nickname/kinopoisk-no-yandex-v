@@ -1,6 +1,4 @@
-﻿using KPNoYandexV.Data;
-using KPNoYandexV.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,14 +16,13 @@ using System.Windows.Shapes;
 namespace KPNoYandexV.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для Films.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Films : Page
     {
-        public MainWindow()
+        public Films()
         {
             InitializeComponent();
-
         }
     }
 }
