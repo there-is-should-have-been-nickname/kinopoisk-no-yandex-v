@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\logo.png" />
     <None Remove="View\logo.png" />
     <None Remove="View\logo1.png" />
     <None Remove="View\logo2.png" />
@@ -24,12 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="View\logo.png" />
+    <Folder Include="Images\Posters\" />
+    <Folder Include="Images\Faces\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images\Posters\" />
-    <Folder Include="Images\Faces\" />
+    <Resource Include="Images\logo.png" />
   </ItemGroup>
 
 </Project>
