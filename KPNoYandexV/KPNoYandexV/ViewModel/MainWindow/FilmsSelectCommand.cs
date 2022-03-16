@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace KPNoYandexV.ViewModel
+namespace KPNoYandexV.ViewModel.MainWindow
 {
-    public class GenresSelectCommand : ICommand
+    public class FilmsSelectCommand : ICommand
     {
         private Action<object> execute;
         private Func<object, bool> canExecute;
@@ -18,7 +18,7 @@ namespace KPNoYandexV.ViewModel
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public GenresSelectCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        public FilmsSelectCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
             this.execute = execute;
             this.canExecute = canExecute;

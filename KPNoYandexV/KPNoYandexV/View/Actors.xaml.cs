@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KPNoYandexV.Data;
+using KPNoYandexV.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,48 @@ namespace KPNoYandexV.View
         public Actors()
         {
             InitializeComponent();
+
+            List<Actor> Actors = new List<Actor>();
+            using (var db = new KPNoYandexVContext())
+            {
+                Actors = db.Actors.ToList();
+            }
+
+            foreach (var Actor in Actors)
+            {
+                var Block = new Rectangle();
+                Block.Width = 300;
+                Block.Height = 50;
+                Block.Stroke = Brushes.Gray;
+                Block.RadiusX = 10;
+                Block.RadiusY = 10;
+                Block.StrokeThickness = 1;
+                Block.HorizontalAlignment = HorizontalAlignment.Center;
+                Block.VerticalAlignment = VerticalAlignment.Stretch;
+                Block.Margin = new Thickness(0, 0, 0, 20);
+
+                var Name = new TextBlock();
+                Name.MaxWidth = 200;
+                Name.TextWrapping = TextWrapping.Wrap;
+                Name.FontFamily = new FontFamily("Consolas");
+                Name.FontSize = 16;
+                Name.Margin = new Thickness(0, -55, 0, 0);
+                Name.Text = Actor.FirstName + " " + Actor.LastName;
+
+                var Number = new TextBlock();
+                Number.MaxWidth = 200;
+                Number.TextWrapping = TextWrapping.Wrap;
+                Number.FontFamily = new FontFamily("Consolas");
+                Number.FontSize = 16;
+                Number.Margin = new Thickness(-60, -55, 0, 0);
+                Number.Text = Actor.Id.ToString();
+
+
+                ActorsStackPanel.Children.Add(Block);
+                ActorsStackPanel.Children.Add(Name);
+                ActorsStackPanel.Children.Add(Number);
+
+            }
         }
     }
 }
