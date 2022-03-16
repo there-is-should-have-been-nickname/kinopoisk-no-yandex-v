@@ -1,5 +1,7 @@
 ﻿using KPNoYandexV.Data;
 using KPNoYandexV.Model;
+using KPNoYandexV.View;
+using KPNoYandexV.ViewModel.FilmsPage;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,7 +36,19 @@ namespace KPNoYandexV.ViewModel
             }
         }
 
+        public FilmOpenCommand FilmOpenClick
+        {
+            get
+            {
+                return new FilmOpenCommand((obj) =>
+                {
+                    int Id = Convert.ToInt32(obj);
+                    var FilmPage = new FilmWindow(Id);
+                    FilmPage.Show();
+                });
+            }
+        }
 
-        
+
     }
 }
