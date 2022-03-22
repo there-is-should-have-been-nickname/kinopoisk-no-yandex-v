@@ -31,7 +31,7 @@
         <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Top" Width="148" Height="20" Margin="0,196,0,0" FontFamily="Consolas" FontSize="12" Text="{Binding RatingAndRevNumber}" Padding="5,0,5,0"/>
 
         <Label Grid.Row="3" Grid.Column="1" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" FontFamily="Consolas" FontSize="16">Actors</Label>
-        <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,29,0,0">
+        <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,29,0,0" Name="ActorsStackPanel">
 
         </StackPanel>
     </Grid>
