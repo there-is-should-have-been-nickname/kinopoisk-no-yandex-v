@@ -1,0 +1,38 @@
+﻿<Window x:Class="KPNoYandexV.View.FilmWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KPNoYandexV.View" xmlns:viewmodel="clr-namespace:KPNoYandexV.ViewModel"
+        mc:Ignorable="d"
+        Title="FilmWindow" Height="400" Width="550">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height=".7*"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+            <ColumnDefinition Width="0.6*"></ColumnDefinition>
+            <ColumnDefinition Width="0.05*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="0.1*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Row="1" Grid.Column="1" Source="{Binding Path}"/>
+        <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" Height="20" FontFamily="Consolas" FontSize="16" Text="{Binding CurrentFilm.Name}" Width="297" Padding="5,0,5,0"/>
+        <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="297" Height="150" FontFamily="Consolas" FontSize="12" Text="{Binding CurrentFilm.Description}" TextWrapping="Wrap" Padding="5,0,5,0"/>
+        <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Height="20" Margin="0,196,0,0" FontFamily="Consolas" FontSize="12" Text="{Binding YearAndCounry}" Padding="5,0,5,0"/>
+        <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Top" Width="148" Height="20" Margin="0,196,0,0" FontFamily="Consolas" FontSize="12" Text="{Binding RatingAndRevNumber}" Padding="5,0,5,0"/>
+
+        <Label Grid.Row="3" Grid.Column="1" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" FontFamily="Consolas" FontSize="16">Actors</Label>
+        <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,29,0,0" Name="ActorsStackPanel">
+
+        </StackPanel>
+    </Grid>
+</Window>
