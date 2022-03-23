@@ -1,7 +1,7 @@
 ﻿using KPNoYandexV.Data;
 using KPNoYandexV.Model;
 using KPNoYandexV.View;
-using KPNoYandexV.ViewModel.FilmsPage;
+using KPNoYandexV.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace KPNoYandexV.ViewModel
 {
-    public class FilmsPageVM : INotifyPropertyChanged
+    public class FilmsPageVM : BaseVM
     {
         private List<Film> films;
 
@@ -20,12 +20,6 @@ namespace KPNoYandexV.ViewModel
 
         public FilmsPageVM()
         {
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
         public void GetAllFilms()
@@ -36,11 +30,11 @@ namespace KPNoYandexV.ViewModel
             }
         }
 
-        public FilmOpenCommand FilmOpenClick
+        public BaseCommand FilmOpenClick
         {
             get
             {
-                return new FilmOpenCommand((obj) =>
+                return new BaseCommand((obj) =>
                 {
                     int Id = Convert.ToInt32(obj);
                     var FilmPage = new FilmWindow(Id);

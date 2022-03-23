@@ -11,14 +11,13 @@ using System.Threading.Tasks;
 
 namespace KPNoYandexV.ViewModel
 {
-    class FilmWindowVM : INotifyPropertyChanged
+    class FilmWindowVM : BaseVM
     {
         private Film film = new Film();
         private string yearAndCounry;
         private string ratingAndRevNumber;
         private string path;
         private List<Actor> actors = new List<Actor>();
-
 
         public Film CurrentFilm { get { return film; } set { film = value; OnPropertyChanged(); } }
         public string YearAndCounry { get { return yearAndCounry; } set { yearAndCounry = value; OnPropertyChanged(); } }
@@ -43,12 +42,6 @@ namespace KPNoYandexV.ViewModel
             YearAndCounry = Date.Year.ToString() + ", " + CurrentFilm.Country;
             RatingAndRevNumber = CurrentFilm.Rating + "; отзывов:" + CurrentFilm.ReviewsNumber;
             Path = $"C:\\Users\\ACER\\Desktop\\Projects\\kinopoisk-no-yandex-v\\KPNoYandexV\\KPNoYandexV\\Images\\Posters\\{CurrentFilm.PosterPath}";
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

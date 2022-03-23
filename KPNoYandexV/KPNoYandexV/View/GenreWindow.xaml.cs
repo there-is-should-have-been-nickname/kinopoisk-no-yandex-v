@@ -25,7 +25,6 @@ namespace KPNoYandexV.View
             InitializeComponent();
 
             var ViewModel = new GenreWindowVM(GenreId);
-
             DataContext = ViewModel;
         }
     }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace KPNoYandexV.ViewModel
 {
-    public class ActorsPageVM : INotifyPropertyChanged
+    public class ActorsPageVM : BaseVM
     {
         private List<Actor> actors;
 
@@ -18,12 +18,6 @@ namespace KPNoYandexV.ViewModel
 
         public ActorsPageVM()
         {
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
 
         public void GetAllFilms()

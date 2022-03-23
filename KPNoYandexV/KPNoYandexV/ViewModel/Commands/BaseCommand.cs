@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace KPNoYandexV.ViewModel.GenresPage
+namespace KPNoYandexV.ViewModel.Commands
 {
-    public class GenreOpenCommand : ICommand
+    public class BaseCommand : ICommand
     {
         private Action<object> execute;
         private Func<object, bool> canExecute;
@@ -18,7 +18,7 @@ namespace KPNoYandexV.ViewModel.GenresPage
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public GenreOpenCommand(Action<object> execute, Func<object, bool> canExecute = null)
+        public BaseCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
             this.execute = execute;
             this.canExecute = canExecute;

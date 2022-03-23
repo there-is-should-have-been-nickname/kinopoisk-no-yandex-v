@@ -47,11 +47,11 @@ namespace KPNoYandexV.View
                 Block.Margin = new Thickness(0, 0, 0, 20);
 
                 var Name = new TextBlock();
-                Name.MaxWidth = 200;
+                Name.MaxWidth = 150;
                 Name.TextWrapping = TextWrapping.Wrap;
                 Name.FontFamily = new FontFamily("Consolas");
                 Name.FontSize = 16;
-                Name.Margin = new Thickness(0, -55, 0, 0);
+                Name.Margin = new Thickness(-80, -55, 0, 0);
                 Name.Text = Genre.Name;
 
                 var Number = new TextBlock();
@@ -59,7 +59,7 @@ namespace KPNoYandexV.View
                 Number.TextWrapping = TextWrapping.Wrap;
                 Number.FontFamily = new FontFamily("Consolas");
                 Number.FontSize = 16;
-                Number.Margin = new Thickness(-60, -55, 0, 0);
+                Number.Margin = new Thickness(-70, -55, 0, 0);
                 Number.Text = Genre.Id.ToString();
 
                 var Btn = new Button();

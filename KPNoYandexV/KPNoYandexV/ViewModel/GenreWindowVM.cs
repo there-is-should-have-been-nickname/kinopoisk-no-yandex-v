@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace KPNoYandexV.ViewModel
 {
-    class GenreWindowVM : INotifyPropertyChanged
+    class GenreWindowVM : BaseVM
     {
         private Genre genre = new Genre();
 
@@ -22,12 +22,6 @@ namespace KPNoYandexV.ViewModel
             {
                 CurrentGenre = context.Genres.SingleOrDefault(gen => gen.Id == Id);
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }
