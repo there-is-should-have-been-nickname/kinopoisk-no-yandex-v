@@ -24,7 +24,6 @@ namespace KPNoYandexV.View
         {
             InitializeComponent();
             var ViewModel = new FilmWindowVM(FilmId);
-
             DataContext = ViewModel;
 
             foreach (var Act in ViewModel.CurrentActors)

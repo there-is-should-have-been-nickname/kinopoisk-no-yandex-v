@@ -1,5 +1,4 @@
-﻿using KPNoYandexV.Data;
-using KPNoYandexV.ViewModel;
+﻿using KPNoYandexV.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,20 +11,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace KPNoYandexV.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для GenreWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class GenreWindow : Window
     {
-        public MainWindow()
+        public GenreWindow(int GenreId)
         {
             InitializeComponent();
-            var ViewModel = new MainWindowVM();
+
+            var ViewModel = new GenreWindowVM(GenreId);
             DataContext = ViewModel;
         }
     }

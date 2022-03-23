@@ -1,5 +1,5 @@
 ﻿using KPNoYandexV.View;
-using KPNoYandexV.ViewModel.MainWindow;
+using KPNoYandexV.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace KPNoYandexV.ViewModel
 {
-    public class MainWindowVM : INotifyPropertyChanged
+    public class MainWindowVM : BaseVM
     {
         private Page films;
         private Page genres;
@@ -33,40 +33,34 @@ namespace KPNoYandexV.ViewModel
             CurrentPage = Films;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
 
-
-        public FilmsSelectCommand FilmsClick
+        public BaseCommand FilmsClick
         {
             get
             {
-                return new FilmsSelectCommand((obj) =>
+                return new BaseCommand((obj) =>
                 {
                     CurrentPage = Films;
                 });
             }
         }
 
-        public GenresSelectCommand GenresClick
+        public BaseCommand GenresClick
         {
             get
             {
-                return new GenresSelectCommand((obj) =>
+                return new BaseCommand((obj) =>
                 {
                     CurrentPage = Genres;
                 });
             }
         }
 
-        public ActorsSelectCommand ActorsClick
+        public BaseCommand ActorsClick
         {
             get
             {
-                return new ActorsSelectCommand((obj) =>
+                return new BaseCommand((obj) =>
                 {
                     CurrentPage = Actors;
                 });

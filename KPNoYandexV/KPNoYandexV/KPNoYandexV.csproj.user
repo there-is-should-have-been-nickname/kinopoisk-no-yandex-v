@@ -19,6 +19,9 @@
     <Compile Update="View\Genres.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\GenreWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="View\Actors.xaml">
@@ -31,6 +34,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\Genres.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\GenreWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\MainWindow.xaml">

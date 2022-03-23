@@ -27,13 +27,11 @@ namespace KPNoYandexV.View
         {
             InitializeComponent();
 
-            List<Film> Films = new List<Film>();
-            using (var db = new KPNoYandexVContext())
-            {
-                Films = db.Films.ToList();
-            }
+            var ViewModel = new FilmsPageVM();
+            DataContext = ViewModel;
+            
 
-            foreach (var Film in Films)
+            foreach (var Film in ViewModel.Films)
             {
                 var Block = new Rectangle();
                 Block.Width = 300;
