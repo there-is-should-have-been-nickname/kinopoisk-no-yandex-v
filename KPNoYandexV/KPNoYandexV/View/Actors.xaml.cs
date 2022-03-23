@@ -58,10 +58,22 @@ namespace KPNoYandexV.View
                 Number.Margin = new Thickness(-70, -55, 0, 0);
                 Number.Text = Actor.Id.ToString();
 
+                var Btn = new Button();
+                Btn.FontFamily = new FontFamily("Consolas");
+                Btn.FontSize = 14;
+                Btn.Content = "Open";
+                Btn.Width = 60;
+                Btn.Height = 30;
+                Btn.Cursor = Cursors.Hand;
+                Btn.Margin = new Thickness(200, -90, 0, 0);
+                Btn.Command = ViewModel.ActorOpenClick;
+                Btn.CommandParameter = Actor.Id;
+
 
                 ActorsStackPanel.Children.Add(Block);
                 ActorsStackPanel.Children.Add(Name);
                 ActorsStackPanel.Children.Add(Number);
+                ActorsStackPanel.Children.Add(Btn);
 
             }
         }

@@ -33,8 +33,8 @@ namespace KPNoYandexV.ViewModel
                 return new BaseCommand((obj) =>
                 {
                     int Id = Convert.ToInt32(obj);
-                    var FilmPage = new GenreWindow(Id);
-                    FilmPage.Show();
+                    var GenrePage = new GenreWindow(Id);
+                    GenrePage.Show();
                 });
             }
         }
