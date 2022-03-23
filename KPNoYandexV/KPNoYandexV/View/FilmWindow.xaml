@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="FilmWindow" Height="400" Width="550">
 
-    <Grid>
+    <Grid Name="Gr">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
