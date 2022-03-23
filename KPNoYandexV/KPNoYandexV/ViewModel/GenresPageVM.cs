@@ -1,5 +1,7 @@
 ﻿using KPNoYandexV.Data;
 using KPNoYandexV.Model;
+using KPNoYandexV.View;
+using KPNoYandexV.ViewModel.GenresPage;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,6 +33,19 @@ namespace KPNoYandexV.ViewModel
             using (var db = new KPNoYandexVContext())
             {
                 Genres = db.Genres.ToList();
+            }
+        }
+
+        public GenreOpenCommand GenreOpenClick
+        {
+            get
+            {
+                return new GenreOpenCommand((obj) =>
+                {
+                    int Id = Convert.ToInt32(obj);
+                    var FilmPage = new GenreWindow(Id);
+                    FilmPage.Show();
+                });
             }
         }
     }

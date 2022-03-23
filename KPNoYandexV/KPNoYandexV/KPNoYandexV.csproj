@@ -27,7 +27,6 @@
   <ItemGroup>
     <Folder Include="Images\Posters\" />
     <Folder Include="Images\Faces\" />
-    <Folder Include="ViewModel\GenresPage\" />
     <Folder Include="ViewModel\ActorsPage\" />
   </ItemGroup>
 

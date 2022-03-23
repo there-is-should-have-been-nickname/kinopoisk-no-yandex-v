@@ -1,5 +1,6 @@
 ﻿using KPNoYandexV.Data;
 using KPNoYandexV.Model;
+using KPNoYandexV.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace KPNoYandexV.View
         {
             InitializeComponent();
 
-            List<Genre> Genres = new List<Genre>();
+            List<Model.Genre> Genres = new List<Model.Genre>();
             using (var db = new KPNoYandexVContext())
             {
                 Genres = db.Genres.ToList();
@@ -61,10 +62,22 @@ namespace KPNoYandexV.View
                 Number.Margin = new Thickness(-60, -55, 0, 0);
                 Number.Text = Genre.Id.ToString();
 
+                var Btn = new Button();
+                Btn.FontFamily = new FontFamily("Consolas");
+                Btn.FontSize = 14;
+                Btn.Content = "Open";
+                Btn.Width = 60;
+                Btn.Height = 30;
+                Btn.Cursor = Cursors.Hand;
+                Btn.Margin = new Thickness(200, -90, 0, 0);
+                Btn.Command = new GenresPageVM().GenreOpenClick;
+                Btn.CommandParameter = Genre.Id;
+
 
                 GenresStackPanel.Children.Add(Block);
                 GenresStackPanel.Children.Add(Name);
                 GenresStackPanel.Children.Add(Number);
+                GenresStackPanel.Children.Add(Btn);
 
             }
         }

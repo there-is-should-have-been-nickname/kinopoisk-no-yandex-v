@@ -67,3 +67,5 @@ C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\KPNoYandexV.pdb
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\KPNoYandexV.genruntimeconfig.cache
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
+C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\GenreWindow.g.cs
+C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\GenreWindow.baml
