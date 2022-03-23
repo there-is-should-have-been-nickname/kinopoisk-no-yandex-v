@@ -1,5 +1,7 @@
 ﻿using KPNoYandexV.Data;
 using KPNoYandexV.Model;
+using KPNoYandexV.View;
+using KPNoYandexV.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +41,19 @@ namespace KPNoYandexV.ViewModel
             DateBirth = "День рождение: " +  Date.Day.ToString() + "." + Date.Month.ToString() + "." + Date.Year.ToString();
             FullName = CurrentActor.FirstName + " " + CurrentActor.LastName;
             Path = $"C:\\Users\\ACER\\Desktop\\Projects\\kinopoisk-no-yandex-v\\KPNoYandexV\\KPNoYandexV\\Images\\Faces\\{CurrentActor.FacePath}";
+        }
+
+        public BaseCommand FilmOpenClick
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    int Id = Convert.ToInt32(obj);
+                    var FilmPage = new FilmWindow(Id);
+                    FilmPage.Show();
+                });
+            }
         }
     }
 }
