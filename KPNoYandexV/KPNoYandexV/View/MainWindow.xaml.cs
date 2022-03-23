@@ -25,7 +25,8 @@ namespace KPNoYandexV.View
         public MainWindow()
         {
             InitializeComponent();
-
+            var ViewModel = new MainWindowVM();
+            DataContext = ViewModel;
         }
     }
 }

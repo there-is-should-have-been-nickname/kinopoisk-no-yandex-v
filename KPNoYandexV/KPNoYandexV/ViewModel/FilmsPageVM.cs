@@ -20,10 +20,6 @@ namespace KPNoYandexV.ViewModel
 
         public FilmsPageVM()
         {
-        }
-
-        public void GetAllFilms()
-        {
             using (var db = new KPNoYandexVContext())
             {
                 Films = db.Films.ToList();

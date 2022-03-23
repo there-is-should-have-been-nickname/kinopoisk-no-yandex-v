@@ -26,14 +26,10 @@ namespace KPNoYandexV.View
         public Genres()
         {
             InitializeComponent();
+            var ViewModel = new GenresPageVM();
+            DataContext = ViewModel;
 
-            List<Model.Genre> Genres = new List<Model.Genre>();
-            using (var db = new KPNoYandexVContext())
-            {
-                Genres = db.Genres.ToList();
-            }
-
-            foreach (var Genre in Genres)
+            foreach (var Genre in ViewModel.Genres)
             {
                 var Block = new Rectangle();
                 Block.Width = 300;

@@ -20,10 +20,6 @@ namespace KPNoYandexV.ViewModel
 
         public GenresPageVM()
         {
-        }
-
-        public void GetAllFilms()
-        {
             using (var db = new KPNoYandexVContext())
             {
                 Genres = db.Genres.ToList();
