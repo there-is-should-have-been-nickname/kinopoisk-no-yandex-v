@@ -68,7 +68,7 @@ namespace KPNoYandexV.View
                 Btn.Height = 30;
                 Btn.Cursor = Cursors.Hand;
                 Btn.Margin = new Thickness(200, -90, 0, 0);
-                Btn.Command = new FilmsPageVM().FilmOpenClick;
+                Btn.Command = ViewModel.FilmOpenClick;
                 Btn.CommandParameter = Film.Id;
 
 

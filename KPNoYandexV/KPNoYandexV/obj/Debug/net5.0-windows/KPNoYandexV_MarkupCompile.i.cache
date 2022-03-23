@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\App.xaml
-6-1637643187
+71815698852
 
-24-1763139404
+26286215710
 2142066255361
-View\Actors.xaml;View\Films.xaml;View\FilmWindow.xaml;View\Genres.xaml;View\GenreWindow.xaml;View\MainWindow.xaml;
+View\Actors.xaml;View\ActorWindow.xaml;View\Films.xaml;View\FilmWindow.xaml;View\Genres.xaml;View\GenreWindow.xaml;View\MainWindow.xaml;
 
 True
 

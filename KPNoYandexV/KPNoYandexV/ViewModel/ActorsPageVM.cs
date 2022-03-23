@@ -1,5 +1,7 @@
 ﻿using KPNoYandexV.Data;
 using KPNoYandexV.Model;
+using KPNoYandexV.View;
+using KPNoYandexV.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +23,19 @@ namespace KPNoYandexV.ViewModel
             using (var db = new KPNoYandexVContext())
             {
                 Actors = db.Actors.ToList();
+            }
+        }
+
+        public BaseCommand ActorOpenClick
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    int Id = Convert.ToInt32(obj);
+                    var ActorPage = new ActorWindow(Id);
+                    ActorPage.Show();
+                });
             }
         }
     }

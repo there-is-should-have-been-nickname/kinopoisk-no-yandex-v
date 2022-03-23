@@ -66,7 +66,7 @@ namespace KPNoYandexV.View
                 Btn.Height = 30;
                 Btn.Cursor = Cursors.Hand;
                 Btn.Margin = new Thickness(200, -90, 0, 0);
-                Btn.Command = new GenresPageVM().GenreOpenClick;
+                Btn.Command = ViewModel.GenreOpenClick;
                 Btn.CommandParameter = Genre.Id;
 
 

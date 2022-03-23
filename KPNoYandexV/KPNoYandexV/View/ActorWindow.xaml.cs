@@ -9,7 +9,6 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
@@ -17,17 +16,18 @@ using System.Windows.Shapes;
 namespace KPNoYandexV.View
 {
     /// <summary>
-    /// Логика взаимодействия для FilmWindow.xaml
+    /// Логика взаимодействия для ActorWindow.xaml
     /// </summary>
-    public partial class FilmWindow : Window
+    public partial class ActorWindow : Window
     {
-        public FilmWindow(int FilmId)
+        public ActorWindow(int ActorId)
         {
             InitializeComponent();
-            var ViewModel = new FilmWindowVM(FilmId);
+
+            var ViewModel = new ActorWindowVM(ActorId);
             DataContext = ViewModel;
 
-            foreach (var Act in ViewModel.CurrentActors)
+            foreach (var Film in ViewModel.CurrentFilms)
             {
                 var TemplateButton = new ControlTemplate(typeof(Button));
                 var Bord = new FrameworkElementFactory(typeof(Border));
@@ -45,15 +45,16 @@ namespace KPNoYandexV.View
                 var Btn = new Button();
                 Btn.Template = TemplateButton;
                 Btn.Margin = new Thickness(10, 15, 0, 0);
-                
+
                 Btn.HorizontalContentAlignment = HorizontalAlignment.Center;
                 Btn.VerticalContentAlignment = VerticalAlignment.Center;
-                Btn.Content = Act.FirstName + " " + Act.LastName;
+                Btn.Content = Film.Name;
                 Btn.Cursor = Cursors.Hand;
-                Btn.Command = ViewModel.ActorOpenClick;
-                Btn.CommandParameter = Act.Id;
+                Btn.Command = ViewModel.FilmOpenClick;
+                Btn.CommandParameter = Film.Id;
 
-                ActorsStackPanel.Children.Add(Btn);
+                FilmsStackPanel.Children.Add(Btn);
+
 
             }
         }
