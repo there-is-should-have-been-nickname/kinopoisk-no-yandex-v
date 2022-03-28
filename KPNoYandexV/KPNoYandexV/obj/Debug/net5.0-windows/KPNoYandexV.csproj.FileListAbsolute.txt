@@ -42,12 +42,10 @@ C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\bin
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\bin\Debug\net5.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\bin\Debug\net5.0-windows\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\bin\Debug\net5.0-windows\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
-C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\KPNoYandexV.csproj.AssemblyReference.cache
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\Actors.g.cs
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\Films.g.cs
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\FilmWindow.g.cs
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\Genres.g.cs
-C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\MainWindow.g.cs
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\App.g.cs
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\KPNoYandexV_MarkupCompile.cache
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\KPNoYandexV_MarkupCompile.lref
@@ -55,7 +53,6 @@ C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\Films.baml
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\FilmWindow.baml
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\Genres.baml
-C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\MainWindow.baml
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\KPNoYandexV.g.resources
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\KPNoYandexV.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\KPNoYandexV.AssemblyInfoInputs.cache
@@ -66,8 +63,14 @@ C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\ref\KPNoYandexV.dll
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\KPNoYandexV.pdb
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\KPNoYandexV.genruntimeconfig.cache
-C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\GenreWindow.g.cs
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\GenreWindow.baml
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\ActorWindow.g.cs
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\ActorWindow.baml
+C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\UserWindow.g.cs
+C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\UserWindow.baml
+C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\KPNoYandexV.csproj.AssemblyReference.cache
+C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\StartWindow.g.cs
+C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\StartWindow.baml
+C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\AdminWindow.g.cs
+C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\AdminWindow.baml

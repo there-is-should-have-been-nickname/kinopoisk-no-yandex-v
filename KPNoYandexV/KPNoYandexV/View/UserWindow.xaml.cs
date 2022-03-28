@@ -20,12 +20,12 @@ namespace KPNoYandexV.View
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UserWindow : Window
     {
-        public MainWindow()
+        public UserWindow()
         {
             InitializeComponent();
-            var ViewModel = new MainWindowVM();
+            var ViewModel = new UserWindowVM(this);
             DataContext = ViewModel;
         }
     }
