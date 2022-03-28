@@ -20,11 +20,14 @@
         </Grid.ColumnDefinitions>
 
         <Label Grid.Row="0" Grid.Column="1" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="30,0,0,0" FontFamily="Consolas" FontSize="30">Films</Label>
-        
+
         <ScrollViewer Grid.Row="1" Grid.Column="1" Padding="0,20,0,20">
             <StackPanel x:Name="FilmsStackPanel">
             </StackPanel>
-        </ScrollViewer> 
+        </ScrollViewer>
+
+        <ComboBox Grid.Row="1" Grid.Column="0" Width="150" Height="40" Margin="25,67,25,273" ItemsSource="{Binding GenresButtons}">
+        </ComboBox>
 
     </Grid>
 </Page>
