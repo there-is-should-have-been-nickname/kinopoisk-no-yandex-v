@@ -15,19 +15,16 @@ namespace KPNoYandexV.ViewModel
     public class MainWindowVM : BaseVM
     {
         private Page films;
-        private Page genres;
         private Page actors;
         private Page currentPage;
 
         public Page Films { get { return films; } set { films = value; OnPropertyChanged(); } }
-        public Page Genres { get { return genres; } set { genres = value; OnPropertyChanged(); } }
         public Page Actors { get { return actors; } set { actors = value; OnPropertyChanged(); } }
         public Page CurrentPage { get { return currentPage; } set { currentPage = value; OnPropertyChanged(); } }
 
         public MainWindowVM() {
 
             Films = new Films();
-            Genres = new Genres();
             Actors = new Actors();
 
             CurrentPage = Films;
@@ -41,17 +38,6 @@ namespace KPNoYandexV.ViewModel
                 return new BaseCommand((obj) =>
                 {
                     CurrentPage = Films;
-                });
-            }
-        }
-
-        public BaseCommand GenresClick
-        {
-            get
-            {
-                return new BaseCommand((obj) =>
-                {
-                    CurrentPage = Genres;
                 });
             }
         }

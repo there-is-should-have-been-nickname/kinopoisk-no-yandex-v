@@ -29,6 +29,12 @@ namespace KPNoYandexV.View
 
             var ViewModel = new ActorsPageVM();
             DataContext = ViewModel;
+
+            DrawActors(ViewModel);
+        }
+
+        private void DrawActors(ActorsPageVM ViewModel)
+        {
             foreach (var Actor in ViewModel.Actors)
             {
                 var Block = new Rectangle();

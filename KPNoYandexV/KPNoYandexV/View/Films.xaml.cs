@@ -27,9 +27,19 @@ namespace KPNoYandexV.View
         {
             InitializeComponent();
 
-            var ViewModel = new FilmsPageVM();
+
+            var ViewModel = new FilmsPageVM(this);
             DataContext = ViewModel;
-            
+
+            DrawFilms(ViewModel);
+        }
+
+        public void DrawFilms(FilmsPageVM ViewModel)
+        {
+            if (FilmsStackPanel.Children.Count != 0)
+            {
+                FilmsStackPanel.Children.Clear();
+            }
 
             foreach (var Film in ViewModel.Films)
             {
