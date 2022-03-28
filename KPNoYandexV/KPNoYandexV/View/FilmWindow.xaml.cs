@@ -51,7 +51,12 @@ namespace KPNoYandexV.View
                 Btn.Content = Act.FirstName + " " + Act.LastName;
                 Btn.Cursor = Cursors.Hand;
                 Btn.Command = ViewModel.ActorOpenClick;
-                Btn.CommandParameter = Act.Id;
+
+                List<object> Parameters = new List<object>();
+                Parameters.Add(Act.Id);
+                Parameters.Add(this);
+
+                Btn.CommandParameter = Parameters;
 
                 ActorsStackPanel.Children.Add(Btn);
 
