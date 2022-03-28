@@ -51,7 +51,11 @@ namespace KPNoYandexV.View
                 Btn.Content = Film.Name;
                 Btn.Cursor = Cursors.Hand;
                 Btn.Command = ViewModel.FilmOpenClick;
-                Btn.CommandParameter = Film.Id;
+
+                List<object> Parameters = new List<object>();
+                Parameters.Add(Film.Id);
+                Parameters.Add(this);
+                Btn.CommandParameter = Parameters;
 
                 FilmsStackPanel.Children.Add(Btn);
 

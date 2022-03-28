@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace KPNoYandexV.ViewModel
 {
@@ -49,9 +50,12 @@ namespace KPNoYandexV.ViewModel
             {
                 return new BaseCommand((obj) =>
                 {
-                    int Id = Convert.ToInt32(obj);
+                    List<object> Parameters = obj as List<object>;
+                    int Id = Convert.ToInt32(Parameters[0]);
                     var FilmPage = new FilmWindow(Id);
                     FilmPage.Show();
+                    Window CurrentWindow = Parameters[1] as Window;
+                    CurrentWindow.Close();
                 });
             }
         }
