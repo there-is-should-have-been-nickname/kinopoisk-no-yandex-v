@@ -29,36 +29,36 @@
 
         <Label Grid.Row="1" Grid.Column="2" Content="Добавление фильма" HorizontalAlignment="Center" FontFamily="Consolas" FontSize="25" Height="40" VerticalAlignment="Center" Width="411" HorizontalContentAlignment="Center"/>
         <Label Grid.Row="2" Grid.Column="1" Content="Название" HorizontalAlignment="Left" Margin="164,4,0,0" VerticalAlignment="Top" Height="25" Width="139" FontFamily="Consolas" FontSize="14" Grid.ColumnSpan="2"/>
-        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="164,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Grid.ColumnSpan="2" Height="25" FontFamily="Consolas" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="164,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Grid.ColumnSpan="2" Height="25" FontFamily="Consolas" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding FilmName, Mode=TwoWay}"/>
 
         <Label Grid.Row="2" Grid.Column="2" Content="Год" HorizontalAlignment="Left" Margin="206,4,0,0" VerticalAlignment="Top" Height="25" Width="139" FontFamily="Consolas" FontSize="14"/>
-        <TextBox Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" Margin="206,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25" FontFamily="Consolas" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        <TextBox Grid.Row="2" Grid.Column="2" HorizontalAlignment="Left" Margin="206,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25" FontFamily="Consolas" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding FilmYear, Mode=TwoWay}"/>
 
         <Label Grid.Row="3" Grid.Column="2" Content="Описание" HorizontalAlignment="Left" Margin="1,4,0,0" VerticalAlignment="Top" Height="25" Width="139" FontFamily="Consolas" FontSize="14"/>
-        <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="164,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="406" Height="68" FontFamily="Consolas" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
+        <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="164,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="406" Height="68" FontFamily="Consolas" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Text="{Binding FilmDesc, Mode=TwoWay}"/>
 
         <Label Grid.Row="4" Grid.Column="2" Content="Страна" HorizontalAlignment="Left" Margin="1,4,0,0" VerticalAlignment="Top" Height="25" Width="139" FontFamily="Consolas" FontSize="14"/>
-        <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="164,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25" FontFamily="Consolas" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
+        <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="164,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25" FontFamily="Consolas" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Text="{Binding FilmCountry, Mode=TwoWay}"/>
 
         <Label Grid.Row="4" Grid.Column="2" Content="Рейтинг" HorizontalAlignment="Left" Margin="206,4,0,0" VerticalAlignment="Top" Height="25" Width="139" FontFamily="Consolas" FontSize="14"/>
-        <TextBox Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" Margin="206,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25" FontFamily="Consolas" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        <TextBox Grid.Row="4" Grid.Column="2" HorizontalAlignment="Left" Margin="206,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25" FontFamily="Consolas" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding FilmRating, Mode=TwoWay}"/>
 
         <Label Grid.Row="5" Grid.Column="1" Content="Количество отзывов" HorizontalAlignment="Left" Margin="164,4,0,0" VerticalAlignment="Top" Height="25" Width="155" FontFamily="Consolas" FontSize="14" Grid.ColumnSpan="2"/>
-        <TextBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="164,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25" FontFamily="Consolas" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
+        <TextBox Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left" Margin="164,32,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25" FontFamily="Consolas" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Grid.ColumnSpan="2" Text="{Binding FilmNumberReviews, Mode=TwoWay}"/>
 
         <Label Grid.Row="5" Grid.Column="2" Content="Путь к постеру" HorizontalAlignment="Left" Margin="206,4,0,0" VerticalAlignment="Top" Height="25" Width="139" FontFamily="Consolas" FontSize="14"/>
-        <TextBox Grid.Row="5" Grid.Column="2" HorizontalAlignment="Left" Margin="206,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25" FontFamily="Consolas" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+        <TextBox Grid.Row="5" Grid.Column="2" HorizontalAlignment="Left" Margin="206,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="25" FontFamily="Consolas" FontSize="16" HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Text="{Binding FilmPath, Mode=TwoWay}"/>
 
-        <Button Grid.Column="2" Grid.Row="6" FontFamily="Consolas" FontSize="16" Width="150" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" >Добавить</Button>
+        <Button Grid.Column="2" Grid.Row="6" FontFamily="Consolas" FontSize="16" Width="150" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center" Command="{Binding AddFilmClick}">Добавить</Button>
 
-        <ComboBox Grid.Row="3" Grid.Column="1" Width="130" Height="30" Margin="17,31,17,39" HorizontalAlignment="Center" VerticalAlignment="Center">
-
-        </ComboBox>
-        <TextBlock Grid.Row="5" Grid.Column="1" Margin="0,1,0,0" FontFamily="Consolas" FontSize="14" TextWrapping="Wrap" IsEnabled="False"/>
-
-        <ComboBox Grid.Row="3" Grid.Column="3" Width="130" Height="30" Margin="17,31,17,39" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <ComboBox Grid.Row="3" Grid.Column="1" Width="130" Height="30" Margin="17,31,17,39" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Genres}">
 
         </ComboBox>
-        <TextBlock Grid.Row="5" Grid.Column="3" Margin="0,1,0,0" FontFamily="Consolas" FontSize="14" TextWrapping="Wrap" IsEnabled="False"/>
+        <TextBlock Grid.Row="5" Grid.RowSpan="2" Grid.Column="1" Margin="0,1,0,0" FontFamily="Consolas" FontSize="14" TextWrapping="Wrap" IsEnabled="False" Text="{Binding ChosenGenresNames}"/>
+
+        <ComboBox Grid.Row="3" Grid.Column="3" Width="130" Height="30" Margin="17,31,17,39" HorizontalAlignment="Center" VerticalAlignment="Center" ItemsSource="{Binding Actors}">
+
+        </ComboBox>
+        <TextBlock Grid.Row="5" Grid.RowSpan="2" Grid.Column="3" Margin="0,1,0,0" FontFamily="Consolas" FontSize="14" TextWrapping="Wrap" IsEnabled="False" Text="{Binding ChosenActorsNames}"/>
     </Grid>
 </Window>

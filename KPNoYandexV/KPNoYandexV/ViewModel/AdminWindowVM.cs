@@ -1,5 +1,6 @@
 ﻿using KPNoYandexV.Data;
 using KPNoYandexV.Model;
+using KPNoYandexV.View;
 using KPNoYandexV.ViewModel.Commands;
 using System;
 using System.Collections.Generic;
@@ -70,6 +71,18 @@ namespace KPNoYandexV.ViewModel
             btn.CommandParameter = CurrentFilm.Id;
 
             FilmNamesDel.Add(btn);
+        }
+
+        public BaseCommand OpenAddFilmWindow
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    var wind = new FilmAddWindow();
+                    wind.Show();
+                });
+            }
         }
 
         public BaseCommand ApplyFilmNameUp
