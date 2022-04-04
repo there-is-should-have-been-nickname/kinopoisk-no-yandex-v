@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="StartWindow" Height="300" Width="500">
     <Grid Width="140" Height="40">
-        <Button FontFamily="Consolas" FontSize="14" Height="35" Margin="0,-57,0,62" Command="{Binding UserOpenClick}">User</Button>
+        <Button FontFamily="Consolas" FontSize="14" Height="35" Margin="0,-57,0,62" Command="{Binding UserOpenClick}" Cursor="Hand">User</Button>
         <Label FontFamily="Consolas" FontSize="8" Margin="23,-22,23,42" FontStyle="Italic">*Лох трусы в горох</Label>
         <Label FontFamily="Consolas" FontSize="8" Margin="-19,72,-19,-52" FontStyle="Italic">*Гений, миллиардер, плейбой, филантроп</Label>
-        <Button FontFamily="Consolas" FontSize="14" Height="35" Margin="0,37,0,-32" Command="{Binding AdminOpenClick}">Admin</Button>
+        <Button FontFamily="Consolas" FontSize="14" Height="35" Margin="0,37,0,-32" Command="{Binding AdminOpenClick}" Cursor="Hand">Admin</Button>
     </Grid>
 </Window>
