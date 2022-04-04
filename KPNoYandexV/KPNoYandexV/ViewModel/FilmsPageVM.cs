@@ -18,14 +18,17 @@ namespace KPNoYandexV.ViewModel
         private List<Film> films;
         private List<Button> genresButtons;
         private Films filmsPage;
+        private string currentGenre;
 
         public List<Film> Films { get { return films; } set { films = value; OnPropertyChanged(); } }
         public List<Button> GenresButtons { get { return genresButtons; } set { genresButtons = value; OnPropertyChanged(); } }
         public Films FilmsPage { get { return filmsPage; } set { filmsPage = value; OnPropertyChanged(); } }
+        public string CurrentGenre { get { return currentGenre; } set { currentGenre = value; OnPropertyChanged(); } }
 
         public FilmsPageVM(Films page)
         {
             FilmsPage = page;
+            CurrentGenre = "Все";
 
             List<Genre> Genres = new List<Genre>();
             using (var db = new KPNoYandexVContext())
@@ -104,9 +107,12 @@ namespace KPNoYandexV.ViewModel
                         if (Id == -1)
                         {
                             Films = db.Films.ToList();
+                            CurrentGenre = "Все";
                         } else
                         {
                             var FilmsGenres = db.FilmsGenres.Where(FG => FG.GenreId == Id).ToList();
+                            var CurGenre = db.Genres.SingleOrDefault(G => G.Id == Id);
+                            CurrentGenre = CurGenre.Name;
 
                             foreach (var FilmGenre in FilmsGenres)
                             {

@@ -26,7 +26,7 @@
             </StackPanel>
         </ScrollViewer>
 
-        <ComboBox Grid.Row="1" Grid.Column="0" Width="150" Height="40" Margin="25,67,25,273" ItemsSource="{Binding GenresButtons}">
+        <ComboBox Grid.Row="1" Grid.Column="0" Width="150" Height="40" Margin="25,89,25,251" ItemsSource="{Binding GenresButtons}" FontFamily="Consolas" FontSize="16" Text="{Binding CurrentGenre}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
         </ComboBox>
 
     </Grid>

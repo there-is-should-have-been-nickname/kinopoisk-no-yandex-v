@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KPNoYandexV.View"
         mc:Ignorable="d"
-        Title="FilmWindow" Height="400" Width="550">
+        Title="FilmWindow" Height="430" Width="550">
 
     <Grid Name="Gr">
         <Grid.RowDefinitions>
@@ -29,6 +29,7 @@
         <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="297" Height="150" FontFamily="Consolas" FontSize="12" Text="{Binding CurrentFilm.Description}" TextWrapping="Wrap" Padding="5,0,5,0"/>
         <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Top" Width="130" Height="20" Margin="0,196,0,0" FontFamily="Consolas" FontSize="12" Text="{Binding YearAndCounry}" Padding="5,0,5,0"/>
         <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Top" Width="148" Height="20" Margin="0,196,0,0" FontFamily="Consolas" FontSize="12" Text="{Binding RatingAndRevNumber}" Padding="5,0,5,0"/>
+        <TextBlock Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" Width="296" Height="25" Margin="0,230,0,0" FontFamily="Consolas" FontSize="12" Text="{Binding GenreNames}" Padding="5,0,5,0" Grid.RowSpan="2"/>
 
         <Label Grid.Row="3" Grid.Column="1" Foreground="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,0,0,0" FontFamily="Consolas" FontSize="16">Actors</Label>
         <StackPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Orientation="Horizontal" Margin="0,29,0,0" Name="ActorsStackPanel">
