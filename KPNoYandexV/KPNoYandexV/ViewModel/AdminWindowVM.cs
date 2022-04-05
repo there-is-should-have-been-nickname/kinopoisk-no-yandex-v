@@ -84,6 +84,23 @@ namespace KPNoYandexV.ViewModel
                 });
             }
         }
+        public BaseCommand OpenUpdateFilmWindow
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    int Id = 0;
+                    using (var db = new KPNoYandexVContext())
+                    {
+                        var CurFilm = db.Films.SingleOrDefault(F => F.Name == CurrentFilmNameUp);
+                        Id = CurFilm.Id;
+                    }
+                    var wind = new UpdateFilmWindow(Id);
+                    wind.Show();
+                });
+            }
+        }
 
         public BaseCommand ApplyFilmNameUp
         {
