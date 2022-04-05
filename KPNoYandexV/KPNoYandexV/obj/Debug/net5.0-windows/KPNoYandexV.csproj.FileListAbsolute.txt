@@ -74,3 +74,7 @@ C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\StartWindow.baml
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\AdminWindow.g.cs
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\AdminWindow.baml
+C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\FilmAddWindow.g.cs
+C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\FilmAddWindow.baml
+C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\UpdateFilmWindow.g.cs
+C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\UpdateFilmWindow.baml
