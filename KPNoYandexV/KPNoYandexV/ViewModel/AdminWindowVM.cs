@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace KPNoYandexV.ViewModel
@@ -98,6 +99,35 @@ namespace KPNoYandexV.ViewModel
                     }
                     var wind = new UpdateFilmWindow(Id);
                     wind.Show();
+                });
+            }
+        }
+
+        public BaseCommand RemoveFilm
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    using (var db = new KPNoYandexVContext())
+                    {
+                        var CurFilm = db.Films.SingleOrDefault(F => F.Name == CurrentFilmNameDel);
+
+                        var ExistedGenres = db.FilmsGenres.Where(FG => FG.FilmId == CurFilm.Id);
+                        foreach (var FilmGenre in ExistedGenres)
+                        {
+                            db.FilmsGenres.Remove(FilmGenre);
+                        }
+                        var ExistedActors = db.FilmsActors.Where(FA => FA.FilmId == CurFilm.Id);
+                        foreach (var FilmActor in ExistedActors)
+                        {
+                            db.FilmsActors.Remove(FilmActor);
+                        }
+                        db.SaveChanges();
+                        db.Films.Remove(CurFilm);
+                        db.SaveChanges();
+                        MessageBox.Show("Удаление успешно");
+                    }
                 });
             }
         }
