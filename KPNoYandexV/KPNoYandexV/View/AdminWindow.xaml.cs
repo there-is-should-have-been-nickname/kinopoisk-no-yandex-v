@@ -24,7 +24,7 @@ namespace KPNoYandexV.View
         {
             InitializeComponent();
 
-            var ViewModel = new AdminWindowVM();
+            var ViewModel = new AdminWindowVM(this);
             DataContext = ViewModel;
         }
     }

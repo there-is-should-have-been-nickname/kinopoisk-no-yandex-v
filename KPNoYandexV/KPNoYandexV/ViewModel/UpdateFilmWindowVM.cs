@@ -1,8 +1,11 @@
 ﻿using KPNoYandexV.Data;
 using KPNoYandexV.Model;
+using KPNoYandexV.View;
 using KPNoYandexV.ViewModel.Commands;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +22,7 @@ namespace KPNoYandexV.ViewModel
         private string chosenActorsNames;
         private List<Button> actors;
         private List<Actor> chosenActors;
+        private UpdateFilmWindow currentWindow;
 
         private Film currentFilm;
         private string filmName;
@@ -44,9 +48,11 @@ namespace KPNoYandexV.ViewModel
         public string FilmNumberReviews { get { return filmNumberReviews; } set { filmNumberReviews = value; OnPropertyChanged(); } }
         public string FilmPath { get { return filmPath; } set { filmPath = value; OnPropertyChanged(); } }
 
+        public UpdateFilmWindow CurrentWindow { get { return currentWindow; } set { currentWindow = value; OnPropertyChanged(); } }
 
-        public UpdateFilmWindowVM(int Id)
+        public UpdateFilmWindowVM(int Id, UpdateFilmWindow window)
         {
+            CurrentWindow = window;
             using (var db = new KPNoYandexVContext())
             {
                 CurrentFilm = db.Films.SingleOrDefault(F => F.Id == Id);
@@ -193,6 +199,21 @@ namespace KPNoYandexV.ViewModel
                 });
             }
         }
+        public BaseCommand ChooseFile
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg";
+                    if (openFileDialog.ShowDialog() == true)
+                    {
+                        FilmPath = openFileDialog.FileName;
+                    }
+                });
+            }
+        }
 
         public BaseCommand UpdateFilmClick
         {
@@ -200,50 +221,82 @@ namespace KPNoYandexV.ViewModel
             {
                 return new BaseCommand((obj) =>
                 {
-                    CurrentFilm.Name = FilmName;
-                    CurrentFilm.Description = FilmDesc;
-                    CurrentFilm.Year = DateTime.Parse($"Jan 1, {FilmYear}");
-                    CurrentFilm.Country = FilmCountry;
-                    CurrentFilm.Rating = Convert.ToDouble(FilmRating);
-                    CurrentFilm.ReviewsNumber = Convert.ToInt32(FilmNumberReviews);
-                    CurrentFilm.PosterPath = FilmPath;
-
-                    using (var db = new KPNoYandexVContext())
+                    if (string.IsNullOrWhiteSpace(FilmName))
+                    {
+                        MessageBox.Show("Не задано название фильма");
+                    }
+                    else if (string.IsNullOrWhiteSpace(FilmYear))
+                    {
+                        MessageBox.Show("Не задан год фильма");
+                    }
+                    else if (string.IsNullOrWhiteSpace(FilmCountry))
+                    {
+                        MessageBox.Show("Не задана страна фильма");
+                    }
+                    else if (string.IsNullOrWhiteSpace(FilmRating))
+                    {
+                        MessageBox.Show("Не задан рейтинг фильма");
+                    }
+                    else
                     {
 
-                        db.Films.Update(CurrentFilm);
-                        db.SaveChanges();
 
-                        var ExistedGenres = db.FilmsGenres.Where(FG => FG.FilmId == CurrentFilm.Id);
-                        foreach (var ExistedGenre in ExistedGenres)
+                        CurrentFilm.Name = FilmName;
+                        CurrentFilm.Description = FilmDesc;
+                        CurrentFilm.Year = DateTime.Parse($"Jan 1, {FilmYear}");
+                        CurrentFilm.Country = FilmCountry;
+                        CurrentFilm.Rating = Convert.ToDouble(FilmRating);
+                        CurrentFilm.ReviewsNumber = Convert.ToInt32(FilmNumberReviews);
+                        string DbFilePath = FilmPath.Split("\\")[^1];
+                        if (DbFilePath != FilmPath)
                         {
-                            db.FilmsGenres.Remove(ExistedGenre);
-                        }
-                        db.SaveChanges();
+                            File.Copy(FilmPath, $"C:\\Users\\ACER\\Desktop\\Projects\\kinopoisk-no-yandex-v\\KPNoYandexV\\KPNoYandexV\\Images\\Posters\\{DbFilePath}", true);
 
-                        var ExistedActors = db.FilmsActors.Where(FA => FA.FilmId == CurrentFilm.Id);
-                        foreach (var ExistedActor in ExistedActors)
-                        {
-                            db.FilmsActors.Remove(ExistedActor);
+                            CurrentFilm.PosterPath = DbFilePath;
                         }
-                        db.SaveChanges();
 
-                        foreach (var ChosenGenre in ChosenGenres)
+                       
+
+                        using (var db = new KPNoYandexVContext())
                         {
-                            FilmsGenre NewFilmGenre = new FilmsGenre();
-                            NewFilmGenre.FilmId = CurrentFilm.Id;
-                            NewFilmGenre.GenreId = ChosenGenre.Id;
-                            db.FilmsGenres.Add(NewFilmGenre);
+
+                            db.Films.Update(CurrentFilm);
+                            db.SaveChanges();
+
+                            var ExistedGenres = db.FilmsGenres.Where(FG => FG.FilmId == CurrentFilm.Id);
+                            foreach (var ExistedGenre in ExistedGenres)
+                            {
+                                db.FilmsGenres.Remove(ExistedGenre);
+                            }
+                            db.SaveChanges();
+
+                            var ExistedActors = db.FilmsActors.Where(FA => FA.FilmId == CurrentFilm.Id);
+                            foreach (var ExistedActor in ExistedActors)
+                            {
+                                db.FilmsActors.Remove(ExistedActor);
+                            }
+                            db.SaveChanges();
+
+                            foreach (var ChosenGenre in ChosenGenres)
+                            {
+                                FilmsGenre NewFilmGenre = new FilmsGenre();
+                                NewFilmGenre.FilmId = CurrentFilm.Id;
+                                NewFilmGenre.GenreId = ChosenGenre.Id;
+                                db.FilmsGenres.Add(NewFilmGenre);
+                            }
+                            foreach (var ChosenActor in ChosenActors)
+                            {
+                                FilmsActor NewFilmActor = new FilmsActor();
+                                NewFilmActor.FilmId = CurrentFilm.Id;
+                                NewFilmActor.ActorId = ChosenActor.Id;
+                                db.FilmsActors.Add(NewFilmActor);
+                            }
+                            db.SaveChanges();
+                            MessageBox.Show("Изменение успешно");
+                            var wind = new AdminWindow();
+                            wind.Show();
+                            CurrentWindow.Close();
                         }
-                        foreach (var ChosenActor in ChosenActors)
-                        {
-                            FilmsActor NewFilmActor = new FilmsActor();
-                            NewFilmActor.FilmId = CurrentFilm.Id;
-                            NewFilmActor.ActorId = ChosenActor.Id;
-                            db.FilmsActors.Add(NewFilmActor);
-                        }
-                        db.SaveChanges();
-                        MessageBox.Show("Изменение успешно");
                     }
                 });
             }
