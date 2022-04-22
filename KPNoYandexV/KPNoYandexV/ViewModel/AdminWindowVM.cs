@@ -1,4 +1,5 @@
 ﻿using KPNoYandexV.Data;
+using KPNoYandexV.Lib;
 using KPNoYandexV.Model;
 using KPNoYandexV.View;
 using KPNoYandexV.ViewModel.Commands;
@@ -19,14 +20,16 @@ namespace KPNoYandexV.ViewModel
         private string currentFilmNameUp;
         private List<Button> filmNamesDel;
         private string currentFilmNameDel;
+        private AdminWindow currentWindow;
 
         public List<Film> Films { get { return films; } set { films = value; OnPropertyChanged(); } }
         public List<Button> FilmNamesUp { get { return filmNamesUp; } set { filmNamesUp = value; OnPropertyChanged(); } }
         public string CurrentFilmNameUp { get { return currentFilmNameUp; } set { currentFilmNameUp = value; OnPropertyChanged(); } }
         public List<Button> FilmNamesDel { get { return filmNamesDel; } set { filmNamesDel = value; OnPropertyChanged(); } }
         public string CurrentFilmNameDel { get { return currentFilmNameDel; } set { currentFilmNameDel = value; OnPropertyChanged(); } }
-
-        public AdminWindowVM() {
+        public AdminWindow CurrentWindow { get { return currentWindow; } set { currentWindow = value; OnPropertyChanged(); } }
+        public AdminWindowVM(AdminWindow window) {
+            CurrentWindow = window;
             using (var db = new KPNoYandexVContext())
             {
                 Films = db.Films.ToList();
@@ -36,42 +39,11 @@ namespace KPNoYandexV.ViewModel
 
             foreach (var CurrentFilm in Films)
             {
-                AddFilmNameUpGenre(CurrentFilm);
-                AddFilmNameDelGenre(CurrentFilm);
+                ViewHelper.AddFilmName(CurrentFilm, FilmNamesUp, ApplyFilmNameUp);
+                ViewHelper.AddFilmName(CurrentFilm, FilmNamesDel, ApplyFilmNameDel);
             }
             currentFilmNameUp = "";
             currentFilmNameDel = "";
-        }
-
-        private void AddFilmNameUpGenre(Film CurrentFilm)
-        {
-            var btn = new Button();
-            btn.Width = 90;
-            btn.Height = 30;
-            btn.FontFamily = new System.Windows.Media.FontFamily("Consolas");
-            btn.FontSize = 10;
-            btn.Content = CurrentFilm.Name;
-            btn.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            btn.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            btn.Command = ApplyFilmNameUp;
-            btn.CommandParameter = CurrentFilm.Id;
-
-            FilmNamesUp.Add(btn);
-        }
-        private void AddFilmNameDelGenre(Film CurrentFilm)
-        {
-            var btn = new Button();
-            btn.Width = 90;
-            btn.Height = 30;
-            btn.FontFamily = new System.Windows.Media.FontFamily("Consolas");
-            btn.FontSize = 10;
-            btn.Content = CurrentFilm.Name;
-            btn.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            btn.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            btn.Command = ApplyFilmNameDel;
-            btn.CommandParameter = CurrentFilm.Id;
-
-            FilmNamesDel.Add(btn);
         }
 
         public BaseCommand OpenAddFilmWindow
@@ -80,8 +52,7 @@ namespace KPNoYandexV.ViewModel
             {
                 return new BaseCommand((obj) =>
                 {
-                    var wind = new FilmAddWindow();
-                    wind.Show();
+                    ViewHelper.WindowInteract<AdminWindow, FilmAddWindow>(CurrentWindow, new FilmAddWindow());
                 });
             }
         }
@@ -91,14 +62,17 @@ namespace KPNoYandexV.ViewModel
             {
                 return new BaseCommand((obj) =>
                 {
-                    int Id = 0;
-                    using (var db = new KPNoYandexVContext())
+                    if (!string.IsNullOrWhiteSpace(CurrentFilmNameUp))
                     {
-                        var CurFilm = db.Films.SingleOrDefault(F => F.Name == CurrentFilmNameUp);
-                        Id = CurFilm.Id;
+                        int Id = 0;
+                        using (var db = new KPNoYandexVContext())
+                        {
+                            var CurFilm = db.Films.SingleOrDefault(F => F.Name == CurrentFilmNameUp);
+                            Id = CurFilm.Id;
+                        }
+                        ViewHelper.WindowInteract<AdminWindow, UpdateFilmWindow>(CurrentWindow, new UpdateFilmWindow(Id));
                     }
-                    var wind = new UpdateFilmWindow(Id);
-                    wind.Show();
+                    
                 });
             }
         }
@@ -109,25 +83,29 @@ namespace KPNoYandexV.ViewModel
             {
                 return new BaseCommand((obj) =>
                 {
-                    using (var db = new KPNoYandexVContext())
+                    if (!string.IsNullOrWhiteSpace(CurrentFilmNameDel))
                     {
-                        var CurFilm = db.Films.SingleOrDefault(F => F.Name == CurrentFilmNameDel);
+                        using (var db = new KPNoYandexVContext())
+                        {
+                            var CurFilm = db.Films.SingleOrDefault(F => F.Name == CurrentFilmNameDel);
 
-                        var ExistedGenres = db.FilmsGenres.Where(FG => FG.FilmId == CurFilm.Id);
-                        foreach (var FilmGenre in ExistedGenres)
-                        {
-                            db.FilmsGenres.Remove(FilmGenre);
+                            var ExistedGenres = db.FilmsGenres.Where(FG => FG.FilmId == CurFilm.Id);
+                            foreach (var FilmGenre in ExistedGenres)
+                            {
+                                db.FilmsGenres.Remove(FilmGenre);
+                            }
+                            var ExistedActors = db.FilmsActors.Where(FA => FA.FilmId == CurFilm.Id);
+                            foreach (var FilmActor in ExistedActors)
+                            {
+                                db.FilmsActors.Remove(FilmActor);
+                            }
+                            db.SaveChanges();
+                            db.Films.Remove(CurFilm);
+                            db.SaveChanges();
+                            MessageBox.Show("Удаление успешно");
                         }
-                        var ExistedActors = db.FilmsActors.Where(FA => FA.FilmId == CurFilm.Id);
-                        foreach (var FilmActor in ExistedActors)
-                        {
-                            db.FilmsActors.Remove(FilmActor);
-                        }
-                        db.SaveChanges();
-                        db.Films.Remove(CurFilm);
-                        db.SaveChanges();
-                        MessageBox.Show("Удаление успешно");
                     }
+                    
                 });
             }
         }
@@ -162,6 +140,17 @@ namespace KPNoYandexV.ViewModel
                         var CurFilm = db.Films.SingleOrDefault(F => F.Id == Id);
                         CurrentFilmNameDel = CurFilm.Name;
                     }
+                });
+            }
+        }
+
+        public BaseCommand BackClick
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    ViewHelper.WindowInteract<AdminWindow, StartWindow>(CurrentWindow, new StartWindow());
                 });
             }
         }

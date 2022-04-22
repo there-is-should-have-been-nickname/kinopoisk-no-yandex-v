@@ -1,8 +1,12 @@
 ﻿using KPNoYandexV.Data;
+using KPNoYandexV.Lib;
 using KPNoYandexV.Model;
+using KPNoYandexV.View;
 using KPNoYandexV.ViewModel.Commands;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +23,7 @@ namespace KPNoYandexV.ViewModel
         private string chosenActorsNames;
         private List<Button> actors;
         private List<Actor> chosenActors;
+        private UpdateFilmWindow currentWindow;
 
         private Film currentFilm;
         private string filmName;
@@ -44,9 +49,11 @@ namespace KPNoYandexV.ViewModel
         public string FilmNumberReviews { get { return filmNumberReviews; } set { filmNumberReviews = value; OnPropertyChanged(); } }
         public string FilmPath { get { return filmPath; } set { filmPath = value; OnPropertyChanged(); } }
 
+        public UpdateFilmWindow CurrentWindow { get { return currentWindow; } set { currentWindow = value; OnPropertyChanged(); } }
 
-        public UpdateFilmWindowVM(int Id)
+        public UpdateFilmWindowVM(int Id, UpdateFilmWindow window)
         {
+            CurrentWindow = window;
             using (var db = new KPNoYandexVContext())
             {
                 CurrentFilm = db.Films.SingleOrDefault(F => F.Id == Id);
@@ -58,12 +65,14 @@ namespace KPNoYandexV.ViewModel
                 var DbGenres = db.Genres.ToList();
                 foreach (var Gen in DbGenres)
                 {
-                    AddGenreButtons(Gen);
+                    ViewHelper.AddButtons<Genre>(Gen, Genres, ChooseGenre);
+                    //AddGenreButtons(Gen);
                 }
                 var DbActors = db.Actors.ToList();
                 foreach (var Act in DbActors)
                 {
-                    AddActorButtons(Act);
+                    ViewHelper.AddButtons<Actor>(Act, Actors, ChooseActor);
+                    //AddActorButtons(Act);
                 }
 
                 List<FilmsGenre> FilmGenres = db.FilmsGenres.Where(FG => FG.FilmId == CurrentFilm.Id).ToList();
@@ -101,22 +110,7 @@ namespace KPNoYandexV.ViewModel
             }
 
         }
-
-        private void AddGenreButtons(Genre CurrentGenre)
-        {
-            var btn = new Button();
-            btn.Width = 90;
-            btn.Height = 30;
-            btn.FontFamily = new System.Windows.Media.FontFamily("Consolas");
-            btn.FontSize = 10;
-            btn.Content = CurrentGenre.Name;
-            btn.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            btn.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            btn.Command = ChooseGenre;
-            btn.CommandParameter = CurrentGenre.Id;
-
-            Genres.Add(btn);
-        }
+        
         public BaseCommand ChooseGenre
         {
             get
@@ -146,21 +140,6 @@ namespace KPNoYandexV.ViewModel
                     }
                 });
             }
-        }
-        private void AddActorButtons(Actor CurrentActor)
-        {
-            var btn = new Button();
-            btn.Width = 90;
-            btn.Height = 30;
-            btn.FontFamily = new System.Windows.Media.FontFamily("Consolas");
-            btn.FontSize = 10;
-            btn.Content = $"{CurrentActor.FirstName} {CurrentActor.LastName}";
-            btn.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            btn.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            btn.Command = ChooseActor;
-            btn.CommandParameter = CurrentActor.Id;
-
-            Actors.Add(btn);
         }
 
         public BaseCommand ChooseActor
@@ -193,6 +172,21 @@ namespace KPNoYandexV.ViewModel
                 });
             }
         }
+        public BaseCommand ChooseFile
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg";
+                    if (openFileDialog.ShowDialog() == true)
+                    {
+                        FilmPath = openFileDialog.FileName;
+                    }
+                });
+            }
+        }
 
         public BaseCommand UpdateFilmClick
         {
@@ -200,13 +194,28 @@ namespace KPNoYandexV.ViewModel
             {
                 return new BaseCommand((obj) =>
                 {
+                var ErrorMessage = ErrorHandler.GetFilmErrorMessage(FilmName, FilmYear, FilmCountry, FilmRating);
+                if (!string.IsNullOrEmpty(ErrorMessage))
+                {
+                    ErrorHandler.ShowError(ErrorMessage);
+                }
+                else
+                {
                     CurrentFilm.Name = FilmName;
                     CurrentFilm.Description = FilmDesc;
                     CurrentFilm.Year = DateTime.Parse($"Jan 1, {FilmYear}");
                     CurrentFilm.Country = FilmCountry;
                     CurrentFilm.Rating = Convert.ToDouble(FilmRating);
                     CurrentFilm.ReviewsNumber = Convert.ToInt32(FilmNumberReviews);
-                    CurrentFilm.PosterPath = FilmPath;
+                    string DbFilePath = FilmPath.Split("\\")[^1];
+                    if (DbFilePath != FilmPath)
+                    {
+                        File.Copy(FilmPath, $"C:\\Users\\ACER\\Desktop\\Projects\\kinopoisk-no-yandex-v\\KPNoYandexV\\KPNoYandexV\\Images\\Posters\\{DbFilePath}", true);
+
+                        CurrentFilm.PosterPath = DbFilePath;
+                    }
+
+                       
 
                     using (var db = new KPNoYandexVContext())
                     {
@@ -244,6 +253,8 @@ namespace KPNoYandexV.ViewModel
                         }
                         db.SaveChanges();
                         MessageBox.Show("Изменение успешно");
+                        ViewHelper.WindowInteract<UpdateFilmWindow, AdminWindow>(CurrentWindow, new AdminWindow());
+                    }
                     }
                 });
             }

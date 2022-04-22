@@ -1,8 +1,12 @@
 ﻿using KPNoYandexV.Data;
+using KPNoYandexV.Lib;
 using KPNoYandexV.Model;
+using KPNoYandexV.View;
 using KPNoYandexV.ViewModel.Commands;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +23,7 @@ namespace KPNoYandexV.ViewModel
         private string chosenActorsNames;
         private List<Button> actors;
         private List<Actor> chosenActors;
+        private FilmAddWindow currentWindow;
 
         private string filmName;
         private string filmYear;
@@ -27,7 +32,6 @@ namespace KPNoYandexV.ViewModel
         private string filmRating;
         private string filmNumberReviews;
         private string filmPath;
-
 
         public List<Button> Genres { get { return genres; } set { genres = value; OnPropertyChanged(); } }
         public List<Genre> ChosenGenres { get { return chosenGenres; } set { chosenGenres = value; OnPropertyChanged(); } }
@@ -42,10 +46,12 @@ namespace KPNoYandexV.ViewModel
         public string FilmRating { get { return filmRating; } set { filmRating = value; OnPropertyChanged(); } }
         public string FilmNumberReviews { get { return filmNumberReviews; } set { filmNumberReviews = value; OnPropertyChanged(); } }
         public string FilmPath { get { return filmPath; } set { filmPath = value; OnPropertyChanged(); } }
+        public FilmAddWindow CurrentWindow { get { return currentWindow; } set { currentWindow = value; OnPropertyChanged(); } }
+        
 
-
-        public FilmAddWindowVM()
+        public FilmAddWindowVM(FilmAddWindow window)
         {
+            CurrentWindow = window;
             using (var db = new KPNoYandexVContext())
             {
                 Genres = new List<Button>();
@@ -53,12 +59,12 @@ namespace KPNoYandexV.ViewModel
                 var DbGenres = db.Genres.ToList();
                 foreach (var Gen in DbGenres)
                 {
-                    AddGenreButtons(Gen);
+                    ViewHelper.AddButtons<Genre>(Gen, Genres, ChooseGenre);
                 }
                 var DbActors = db.Actors.ToList();
                 foreach (var Act in DbActors)
                 {
-                    AddActorButtons(Act);
+                    ViewHelper.AddButtons<Actor>(Act, Actors, ChooseActor);
                 }
                 ChosenActors = new List<Actor>();
                 ChosenGenres = new List<Genre>();
@@ -67,21 +73,6 @@ namespace KPNoYandexV.ViewModel
             }
         }
 
-        private void AddGenreButtons(Genre CurrentGenre)
-        {
-            var btn = new Button();
-            btn.Width = 90;
-            btn.Height = 30;
-            btn.FontFamily = new System.Windows.Media.FontFamily("Consolas");
-            btn.FontSize = 10;
-            btn.Content = CurrentGenre.Name;
-            btn.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            btn.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            btn.Command = ChooseGenre;
-            btn.CommandParameter = CurrentGenre.Id;
-
-            Genres.Add(btn);
-        }
         public BaseCommand ChooseGenre
         {
             get
@@ -110,21 +101,6 @@ namespace KPNoYandexV.ViewModel
                     }
                 });
             }
-        }
-        private void AddActorButtons(Actor CurrentActor)
-        {
-            var btn = new Button();
-            btn.Width = 90;
-            btn.Height = 30;
-            btn.FontFamily = new System.Windows.Media.FontFamily("Consolas");
-            btn.FontSize = 10;
-            btn.Content = $"{CurrentActor.FirstName} {CurrentActor.LastName}";
-            btn.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            btn.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            btn.Command = ChooseActor;
-            btn.CommandParameter = CurrentActor.Id;
-
-            Actors.Add(btn);
         }
 
         public BaseCommand ChooseActor
@@ -158,43 +134,72 @@ namespace KPNoYandexV.ViewModel
             }
         }
 
+        public BaseCommand ChooseFile
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    OpenFileDialog openFileDialog = new OpenFileDialog();
+                    openFileDialog.Filter = "Image files (*.png;*.jpeg)|*.png;*.jpeg";
+                    if (openFileDialog.ShowDialog() == true)
+                    {
+                        FilmPath = openFileDialog.FileName;
+                    }
+                });
+            }
+        }
+
         public BaseCommand AddFilmClick
         {
             get
             {
                 return new BaseCommand((obj) =>
                 {
-                    Film NewFilm = new Film();
-                    NewFilm.Name = FilmName;
-                    NewFilm.Description = FilmDesc;
-                    NewFilm.Year = DateTime.Parse($"Jan 1, {FilmYear}");
-                    NewFilm.Country = FilmCountry;
-                    NewFilm.Rating = Convert.ToDouble(FilmRating);
-                    NewFilm.ReviewsNumber = Convert.ToInt32(FilmNumberReviews);
-                    NewFilm.PosterPath = FilmPath;
-
-                    using (var db = new KPNoYandexVContext())
+                    var ErrorMessage = ErrorHandler.GetFilmErrorMessage(FilmName, FilmYear, FilmCountry, FilmRating);
+                    if (!string.IsNullOrEmpty(ErrorMessage))
                     {
+                        ErrorHandler.ShowError(ErrorMessage);
+                    }
+                    else
+                    {
+                        Film NewFilm = new Film();
+                        NewFilm.Name = FilmName;
+                        NewFilm.Description = FilmDesc;
+                        NewFilm.Year = DateTime.Parse($"Jan 1, {FilmYear}");
+                        NewFilm.Country = FilmCountry;
+                        NewFilm.Rating = Convert.ToDouble(FilmRating);
+                        NewFilm.ReviewsNumber = Convert.ToInt32(FilmNumberReviews);
+                        string DbFilePath = FilmPath.Split("\\")[^1];
 
-                        db.Films.Add(NewFilm);
-                        db.SaveChanges();
+                        File.Copy(FilmPath, $"C:\\Users\\ACER\\Desktop\\Projects\\kinopoisk-no-yandex-v\\KPNoYandexV\\KPNoYandexV\\Images\\Posters\\{DbFilePath}", true);
 
-                        foreach(var ChosenGenre in ChosenGenres)
+                        NewFilm.PosterPath = DbFilePath;
+
+                        using (var db = new KPNoYandexVContext())
                         {
-                            FilmsGenre NewFilmGenre = new FilmsGenre();
-                            NewFilmGenre.FilmId = NewFilm.Id;
-                            NewFilmGenre.GenreId = ChosenGenre.Id;
-                            db.FilmsGenres.Add(NewFilmGenre);
+
+                            db.Films.Add(NewFilm);
+                            db.SaveChanges();
+
+                            foreach (var ChosenGenre in ChosenGenres)
+                            {
+                                FilmsGenre NewFilmGenre = new FilmsGenre();
+                                NewFilmGenre.FilmId = NewFilm.Id;
+                                NewFilmGenre.GenreId = ChosenGenre.Id;
+                                db.FilmsGenres.Add(NewFilmGenre);
+                            }
+                            foreach (var ChosenActor in ChosenActors)
+                            {
+                                FilmsActor NewFilmActor = new FilmsActor();
+                                NewFilmActor.FilmId = NewFilm.Id;
+                                NewFilmActor.ActorId = ChosenActor.Id;
+                                db.FilmsActors.Add(NewFilmActor);
+                            }
+                            db.SaveChanges();
+                            MessageBox.Show("Добавление успешно");
+                            ViewHelper.WindowInteract<FilmAddWindow, AdminWindow>(CurrentWindow, new AdminWindow());
                         }
-                        foreach (var ChosenActor in ChosenActors)
-                        {
-                            FilmsActor NewFilmActor = new FilmsActor();
-                            NewFilmActor.FilmId = NewFilm.Id;
-                            NewFilmActor.ActorId = ChosenActor.Id;
-                            db.FilmsActors.Add(NewFilmActor);
-                        }
-                        db.SaveChanges();
-                        MessageBox.Show("Добавление успешно");
                     }
                 });
             }

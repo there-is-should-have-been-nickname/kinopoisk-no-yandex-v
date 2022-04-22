@@ -23,7 +23,7 @@ namespace KPNoYandexV.View
         public FilmAddWindow()
         {
             InitializeComponent();
-            var ViewModel = new FilmAddWindowVM();
+            var ViewModel = new FilmAddWindowVM(this);
             DataContext = ViewModel;
         }
     }
