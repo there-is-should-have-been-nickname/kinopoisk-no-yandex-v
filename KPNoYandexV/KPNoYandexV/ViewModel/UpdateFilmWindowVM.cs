@@ -66,13 +66,11 @@ namespace KPNoYandexV.ViewModel
                 foreach (var Gen in DbGenres)
                 {
                     ViewHelper.AddButtons<Genre>(Gen, Genres, ChooseGenre);
-                    //AddGenreButtons(Gen);
                 }
                 var DbActors = db.Actors.ToList();
                 foreach (var Act in DbActors)
                 {
                     ViewHelper.AddButtons<Actor>(Act, Actors, ChooseActor);
-                    //AddActorButtons(Act);
                 }
 
                 List<FilmsGenre> FilmGenres = db.FilmsGenres.Where(FG => FG.FilmId == CurrentFilm.Id).ToList();

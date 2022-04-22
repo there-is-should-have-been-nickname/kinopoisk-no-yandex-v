@@ -191,10 +191,10 @@ namespace KPNoYandexV.ViewModel
                         int Id = 0;
                         using (var db = new KPNoYandexVContext())
                         {
-                            var CurFilm = db.Films.SingleOrDefault(F => F.Name == CurrentFilmNameUp);
-                            Id = CurFilm.Id;
+                            var CurGenre = db.Genres.SingleOrDefault(G => G.Name == CurrentGenreNameUp);
+                            Id = CurGenre.Id;
                         }
-                        ViewHelper.WindowInteract<AdminWindow, UpdateFilmWindow>(CurrentWindow, new UpdateFilmWindow(Id));
+                        ViewHelper.WindowInteract<AdminWindow, UpdateGenreWindow>(CurrentWindow, new UpdateGenreWindow(Id));
                     }
 
                 });
@@ -211,22 +211,35 @@ namespace KPNoYandexV.ViewModel
                     {
                         using (var db = new KPNoYandexVContext())
                         {
-                            var CurFilm = db.Films.SingleOrDefault(F => F.Name == CurrentFilmNameDel);
+                            var CurGenre = db.Genres.SingleOrDefault(G => G.Name == CurrentGenreNameDel);
 
-                            var ExistedGenres = db.FilmsGenres.Where(FG => FG.FilmId == CurFilm.Id);
-                            foreach (var FilmGenre in ExistedGenres)
+                            var ExistedFilms = db.FilmsGenres.Where(FG => FG.GenreId == CurGenre.Id);
+                            foreach (var FilmGenre in ExistedFilms)
                             {
                                 db.FilmsGenres.Remove(FilmGenre);
                             }
-                            var ExistedActors = db.FilmsActors.Where(FA => FA.FilmId == CurFilm.Id);
-                            foreach (var FilmActor in ExistedActors)
-                            {
-                                db.FilmsActors.Remove(FilmActor);
-                            }
                             db.SaveChanges();
-                            db.Films.Remove(CurFilm);
+                            db.Genres.Remove(CurGenre);
                             db.SaveChanges();
                             MessageBox.Show("Удаление успешно");
+
+                            var TempGenreNamesDel = new List<Button>();
+                            foreach (var GenreName in GenreNamesDel)
+                            {
+                                if (GenreName.Content as string != CurrentGenreNameDel)
+                                {
+                                    TempGenreNamesDel.Add(GenreName);
+                                }
+                                
+                            }
+                            GenreNamesDel = new List<Button>();
+                            foreach (var TGenre in TempGenreNamesDel)
+                            {
+                                GenreNamesDel.Add(TGenre);
+                            }
+                            CurrentGenreNameDel = "";
+
+
                         }
                     }
 
