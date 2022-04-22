@@ -20,6 +20,13 @@ namespace KPNoYandexV.ViewModel
         private string currentFilmNameUp;
         private List<Button> filmNamesDel;
         private string currentFilmNameDel;
+
+        private List<Genre> genres;
+        private List<Button> genreNamesUp;
+        private string currentGenreNameUp;
+        private List<Button> genreNamesDel;
+        private string currentGenreNameDel;
+
         private AdminWindow currentWindow;
 
         public List<Film> Films { get { return films; } set { films = value; OnPropertyChanged(); } }
@@ -27,23 +34,42 @@ namespace KPNoYandexV.ViewModel
         public string CurrentFilmNameUp { get { return currentFilmNameUp; } set { currentFilmNameUp = value; OnPropertyChanged(); } }
         public List<Button> FilmNamesDel { get { return filmNamesDel; } set { filmNamesDel = value; OnPropertyChanged(); } }
         public string CurrentFilmNameDel { get { return currentFilmNameDel; } set { currentFilmNameDel = value; OnPropertyChanged(); } }
+
+        public List<Genre> Genres { get { return genres; } set { genres = value; OnPropertyChanged(); } }
+        public List<Button> GenreNamesUp { get { return genreNamesUp; } set { genreNamesUp = value; OnPropertyChanged(); } }
+        public string CurrentGenreNameUp { get { return currentGenreNameUp; } set { currentGenreNameUp = value; OnPropertyChanged(); } }
+        public List<Button> GenreNamesDel { get { return genreNamesDel; } set { genreNamesDel = value; OnPropertyChanged(); } }
+        public string CurrentGenreNameDel { get { return currentGenreNameDel; } set { currentGenreNameDel = value; OnPropertyChanged(); } }
         public AdminWindow CurrentWindow { get { return currentWindow; } set { currentWindow = value; OnPropertyChanged(); } }
         public AdminWindowVM(AdminWindow window) {
             CurrentWindow = window;
             using (var db = new KPNoYandexVContext())
             {
                 Films = db.Films.ToList();
+                Genres = db.Genres.ToList();
             }
             FilmNamesUp = new List<Button>();
             FilmNamesDel = new List<Button>();
+            GenreNamesUp = new List<Button>();
+            GenreNamesDel = new List<Button>();
 
             foreach (var CurrentFilm in Films)
             {
                 ViewHelper.AddFilmName(CurrentFilm, FilmNamesUp, ApplyFilmNameUp);
                 ViewHelper.AddFilmName(CurrentFilm, FilmNamesDel, ApplyFilmNameDel);
             }
-            currentFilmNameUp = "";
-            currentFilmNameDel = "";
+
+            foreach (var CurrentGenre in Genres)
+            {
+                ViewHelper.AddGenreName(CurrentGenre, GenreNamesUp, ApplyGenreNameUp);
+                ViewHelper.AddGenreName(CurrentGenre, GenreNamesDel, ApplyGenreNameDel);
+            }
+
+
+            CurrentFilmNameUp = "";
+            CurrentFilmNameDel = "";
+            CurrentGenreNameUp = "";
+            CurrentGenreNameDel = "";
         }
 
         public BaseCommand OpenAddFilmWindow
@@ -139,6 +165,104 @@ namespace KPNoYandexV.ViewModel
                     {
                         var CurFilm = db.Films.SingleOrDefault(F => F.Id == Id);
                         CurrentFilmNameDel = CurFilm.Name;
+                    }
+                });
+            }
+        }
+
+        public BaseCommand OpenAddGenreWindow
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    ViewHelper.WindowInteract<AdminWindow, GenreAddWindow>(CurrentWindow, new GenreAddWindow());
+                });
+            }
+        }
+        public BaseCommand OpenUpdateGenreWindow
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    if (!string.IsNullOrWhiteSpace(CurrentGenreNameUp))
+                    {
+                        int Id = 0;
+                        using (var db = new KPNoYandexVContext())
+                        {
+                            var CurFilm = db.Films.SingleOrDefault(F => F.Name == CurrentFilmNameUp);
+                            Id = CurFilm.Id;
+                        }
+                        ViewHelper.WindowInteract<AdminWindow, UpdateFilmWindow>(CurrentWindow, new UpdateFilmWindow(Id));
+                    }
+
+                });
+            }
+        }
+
+        public BaseCommand RemoveGenre
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    if (!string.IsNullOrWhiteSpace(CurrentGenreNameDel))
+                    {
+                        using (var db = new KPNoYandexVContext())
+                        {
+                            var CurFilm = db.Films.SingleOrDefault(F => F.Name == CurrentFilmNameDel);
+
+                            var ExistedGenres = db.FilmsGenres.Where(FG => FG.FilmId == CurFilm.Id);
+                            foreach (var FilmGenre in ExistedGenres)
+                            {
+                                db.FilmsGenres.Remove(FilmGenre);
+                            }
+                            var ExistedActors = db.FilmsActors.Where(FA => FA.FilmId == CurFilm.Id);
+                            foreach (var FilmActor in ExistedActors)
+                            {
+                                db.FilmsActors.Remove(FilmActor);
+                            }
+                            db.SaveChanges();
+                            db.Films.Remove(CurFilm);
+                            db.SaveChanges();
+                            MessageBox.Show("Удаление успешно");
+                        }
+                    }
+
+                });
+            }
+        }
+
+        public BaseCommand ApplyGenreNameUp
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    int Id = Convert.ToInt32(obj);
+
+                    using (var db = new KPNoYandexVContext())
+                    {
+                        var CurGenre = db.Genres.SingleOrDefault(G => G.Id == Id);
+                        CurrentGenreNameUp = CurGenre.Name;
+                    }
+                });
+            }
+        }
+
+        public BaseCommand ApplyGenreNameDel
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    int Id = Convert.ToInt32(obj);
+
+                    using (var db = new KPNoYandexVContext())
+                    {
+                        var CurGenre = db.Genres.SingleOrDefault(G => G.Id == Id);
+                        CurrentGenreNameDel = CurGenre.Name;
                     }
                 });
             }

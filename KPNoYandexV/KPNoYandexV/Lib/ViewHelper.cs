@@ -28,6 +28,22 @@ namespace KPNoYandexV.Lib
             FilmNames.Add(btn);
         }
 
+        public static void AddGenreName(Genre CurrentGenre, List<Button> GenreNames, BaseCommand CurrentCommand)
+        {
+            var btn = new Button();
+            btn.Width = 90;
+            btn.Height = 30;
+            btn.FontFamily = new System.Windows.Media.FontFamily("Consolas");
+            btn.FontSize = 10;
+            btn.Content = CurrentGenre.Name;
+            btn.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+            btn.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+            btn.Command = CurrentCommand;
+            btn.CommandParameter = CurrentGenre.Id;
+
+            GenreNames.Add(btn);
+        }
+
         public static void AddButtons<T>(T Elem, List<Button> CurrentList, BaseCommand CurrentCommand)
         {
             var btn = new Button();
@@ -38,7 +54,10 @@ namespace KPNoYandexV.Lib
             if (Elem is Actor)
             {
                 btn.Content = $"{(Elem as Actor).FirstName} {(Elem as Actor).LastName}";
-            } else
+            } else if (Elem is Film) {
+                btn.Content = (Elem as Film).Name;
+            } 
+            else
             {
                 btn.Content = (Elem as Genre).Name;
             }
@@ -48,6 +67,8 @@ namespace KPNoYandexV.Lib
             if (Elem is Actor)
             {
                 btn.CommandParameter = (Elem as Actor).Id;
+            } else if (Elem is Film) {
+                btn.CommandParameter = (Elem as Film).Id;
             }
             else
             {

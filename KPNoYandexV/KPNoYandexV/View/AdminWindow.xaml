@@ -33,5 +33,16 @@
         <ComboBox Grid.Row="1" Grid.Column="1" Width="120" Height="30" Margin="353,77,193,11" ItemsSource="{Binding FilmNamesDel}" Text="{Binding CurrentFilmNameDel}">
 
         </ComboBox>
+
+        <Button Grid.Column="1" Grid.Row="3" Content="Добавить жанр" HorizontalAlignment="Center" VerticalAlignment="Top" Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="280" Command="{Binding OpenAddGenreWindow}"/>
+        <Button Grid.Column="1" Grid.Row="3" Content="Изменить жанр" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="150" Margin="183,35,0,0" Command="{Binding OpenUpdateGenreWindow}"/>
+        <Button Grid.Column="1" Grid.Row="3" Content="Удалить жанр" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="150" Margin="183,78,0,0" Command="{Binding RemoveGenre}"/>
+
+        <ComboBox Grid.Row="3" Grid.Column="1" Width="120" Height="30" Margin="353,35,193,53" ItemsSource="{Binding GenreNamesUp}" Text="{Binding CurrentGenreNameUp}">
+
+        </ComboBox>
+        <ComboBox Grid.Row="3" Grid.Column="1" Width="120" Height="30" Margin="353,77,193,11" ItemsSource="{Binding GenreNamesDel}" Text="{Binding CurrentGenreNameDel}">
+
+        </ComboBox>
     </Grid>
 </Window>
