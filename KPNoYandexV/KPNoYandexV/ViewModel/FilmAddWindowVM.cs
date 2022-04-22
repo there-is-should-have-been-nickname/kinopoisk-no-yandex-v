@@ -1,4 +1,5 @@
 ﻿using KPNoYandexV.Data;
+using KPNoYandexV.Lib;
 using KPNoYandexV.Model;
 using KPNoYandexV.View;
 using KPNoYandexV.ViewModel.Commands;
@@ -58,12 +59,12 @@ namespace KPNoYandexV.ViewModel
                 var DbGenres = db.Genres.ToList();
                 foreach (var Gen in DbGenres)
                 {
-                    AddGenreButtons(Gen);
+                    ViewHelper.AddButtons<Genre>(Gen, Genres, ChooseGenre);
                 }
                 var DbActors = db.Actors.ToList();
                 foreach (var Act in DbActors)
                 {
-                    AddActorButtons(Act);
+                    ViewHelper.AddButtons<Actor>(Act, Actors, ChooseActor);
                 }
                 ChosenActors = new List<Actor>();
                 ChosenGenres = new List<Genre>();
@@ -72,21 +73,6 @@ namespace KPNoYandexV.ViewModel
             }
         }
 
-        private void AddGenreButtons(Genre CurrentGenre)
-        {
-            var btn = new Button();
-            btn.Width = 95;
-            btn.Height = 25;
-            btn.FontFamily = new System.Windows.Media.FontFamily("Consolas");
-            btn.FontSize = 10;
-            btn.Content = CurrentGenre.Name;
-            btn.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            btn.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            btn.Command = ChooseGenre;
-            btn.CommandParameter = CurrentGenre.Id;
-
-            Genres.Add(btn);
-        }
         public BaseCommand ChooseGenre
         {
             get
@@ -115,21 +101,6 @@ namespace KPNoYandexV.ViewModel
                     }
                 });
             }
-        }
-        private void AddActorButtons(Actor CurrentActor)
-        {
-            var btn = new Button();
-            btn.Width = 90;
-            btn.Height = 30;
-            btn.FontFamily = new System.Windows.Media.FontFamily("Consolas");
-            btn.FontSize = 10;
-            btn.Content = $"{CurrentActor.FirstName} {CurrentActor.LastName}";
-            btn.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            btn.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            btn.Command = ChooseActor;
-            btn.CommandParameter = CurrentActor.Id;
-
-            Actors.Add(btn);
         }
 
         public BaseCommand ChooseActor
@@ -185,19 +156,12 @@ namespace KPNoYandexV.ViewModel
             {
                 return new BaseCommand((obj) =>
                 {
-                    if (string.IsNullOrWhiteSpace(FilmName))
+                    var ErrorMessage = ErrorHandler.GetFilmErrorMessage(FilmName, FilmYear, FilmCountry, FilmRating);
+                    if (!string.IsNullOrEmpty(ErrorMessage))
                     {
-                        MessageBox.Show("Не задано название фильма");
-                    } else if (string.IsNullOrWhiteSpace(FilmYear))
-                    {
-                        MessageBox.Show("Не задан год фильма");
-                    } else if (string.IsNullOrWhiteSpace(FilmCountry))
-                    {
-                        MessageBox.Show("Не задана страна фильма");
-                    } else if (string.IsNullOrWhiteSpace(FilmRating))
-                    {
-                        MessageBox.Show("Не задан рейтинг фильма");
-                    } else
+                        ErrorHandler.ShowError(ErrorMessage);
+                    }
+                    else
                     {
                         Film NewFilm = new Film();
                         NewFilm.Name = FilmName;
@@ -234,9 +198,7 @@ namespace KPNoYandexV.ViewModel
                             }
                             db.SaveChanges();
                             MessageBox.Show("Добавление успешно");
-                            var wind = new AdminWindow();
-                            wind.Show();
-                            CurrentWindow.Close();
+                            ViewHelper.WindowInteract<FilmAddWindow, AdminWindow>(CurrentWindow, new AdminWindow());
                         }
                     }
                 });

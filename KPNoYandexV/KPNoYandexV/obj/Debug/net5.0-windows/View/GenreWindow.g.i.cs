@@ -52,7 +52,7 @@ namespace KPNoYandexV.View {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/KPNoYandexV;component/view/genrewindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/KPNoYandexV;V1.0.0.0;component/view/genrewindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\View\GenreWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

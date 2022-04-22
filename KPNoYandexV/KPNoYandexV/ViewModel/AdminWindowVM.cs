@@ -1,4 +1,5 @@
 ﻿using KPNoYandexV.Data;
+using KPNoYandexV.Lib;
 using KPNoYandexV.Model;
 using KPNoYandexV.View;
 using KPNoYandexV.ViewModel.Commands;
@@ -38,42 +39,11 @@ namespace KPNoYandexV.ViewModel
 
             foreach (var CurrentFilm in Films)
             {
-                AddFilmNameUpGenre(CurrentFilm);
-                AddFilmNameDelGenre(CurrentFilm);
+                ViewHelper.AddFilmName(CurrentFilm, FilmNamesUp, ApplyFilmNameUp);
+                ViewHelper.AddFilmName(CurrentFilm, FilmNamesDel, ApplyFilmNameDel);
             }
             currentFilmNameUp = "";
             currentFilmNameDel = "";
-        }
-
-        private void AddFilmNameUpGenre(Film CurrentFilm)
-        {
-            var btn = new Button();
-            btn.Width = 90;
-            btn.Height = 30;
-            btn.FontFamily = new System.Windows.Media.FontFamily("Consolas");
-            btn.FontSize = 10;
-            btn.Content = CurrentFilm.Name;
-            btn.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            btn.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            btn.Command = ApplyFilmNameUp;
-            btn.CommandParameter = CurrentFilm.Id;
-
-            FilmNamesUp.Add(btn);
-        }
-        private void AddFilmNameDelGenre(Film CurrentFilm)
-        {
-            var btn = new Button();
-            btn.Width = 90;
-            btn.Height = 30;
-            btn.FontFamily = new System.Windows.Media.FontFamily("Consolas");
-            btn.FontSize = 10;
-            btn.Content = CurrentFilm.Name;
-            btn.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            btn.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            btn.Command = ApplyFilmNameDel;
-            btn.CommandParameter = CurrentFilm.Id;
-
-            FilmNamesDel.Add(btn);
         }
 
         public BaseCommand OpenAddFilmWindow
@@ -82,9 +52,7 @@ namespace KPNoYandexV.ViewModel
             {
                 return new BaseCommand((obj) =>
                 {
-                    var wind = new FilmAddWindow();
-                    wind.Show();
-                    CurrentWindow.Close();
+                    ViewHelper.WindowInteract<AdminWindow, FilmAddWindow>(CurrentWindow, new FilmAddWindow());
                 });
             }
         }
@@ -102,9 +70,7 @@ namespace KPNoYandexV.ViewModel
                             var CurFilm = db.Films.SingleOrDefault(F => F.Name == CurrentFilmNameUp);
                             Id = CurFilm.Id;
                         }
-                        var wind = new UpdateFilmWindow(Id);
-                        wind.Show();
-                        CurrentWindow.Close();
+                        ViewHelper.WindowInteract<AdminWindow, UpdateFilmWindow>(CurrentWindow, new UpdateFilmWindow(Id));
                     }
                     
                 });
@@ -184,10 +150,7 @@ namespace KPNoYandexV.ViewModel
             {
                 return new BaseCommand((obj) =>
                 {
-                    var StartWind = new StartWindow();
-                    StartWind.Show();
-
-                    CurrentWindow.Close();
+                    ViewHelper.WindowInteract<AdminWindow, StartWindow>(CurrentWindow, new StartWindow());
                 });
             }
         }
