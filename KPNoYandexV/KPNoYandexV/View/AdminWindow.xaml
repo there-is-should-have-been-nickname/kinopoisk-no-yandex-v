@@ -44,5 +44,16 @@
         <ComboBox Grid.Row="3" Grid.Column="1" Width="120" Height="30" Margin="353,77,193,11" ItemsSource="{Binding GenreNamesDel}" Text="{Binding CurrentGenreNameDel}">
 
         </ComboBox>
+
+        <Button Grid.Column="1" Grid.Row="5" Content="Добавить актера" HorizontalAlignment="Center" VerticalAlignment="Top" Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="280" Command="{Binding OpenAddActorWindow}"/>
+        <Button Grid.Column="1" Grid.Row="5" Content="Изменить актера" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="150" Margin="183,35,0,0" Command="{Binding OpenUpdateActorWindow}"/>
+        <Button Grid.Column="1" Grid.Row="5" Content="Удалить актера" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="150" Margin="183,78,0,0" Command="{Binding RemoveActor}"/>
+
+        <ComboBox Grid.Row="5" Grid.Column="1" Width="120" Height="30" Margin="353,35,193,53" ItemsSource="{Binding ActorNamesUp}" Text="{Binding CurrentActorNameUp}">
+
+        </ComboBox>
+        <ComboBox Grid.Row="5" Grid.Column="1" Width="120" Height="30" Margin="353,77,193,11" ItemsSource="{Binding ActorNamesDel}" Text="{Binding CurrentActorNameDel}">
+
+        </ComboBox>
     </Grid>
 </Window>

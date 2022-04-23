@@ -82,3 +82,5 @@ C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\GenreAddWindow.baml
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\UpdateGenreWindow.g.cs
 C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\UpdateGenreWindow.baml
+C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\ActorAddWindow.g.cs
+C:\Users\ACER\Desktop\Projects\kinopoisk-no-yandex-v\KPNoYandexV\KPNoYandexV\obj\Debug\net5.0-windows\View\ActorAddWindow.baml
