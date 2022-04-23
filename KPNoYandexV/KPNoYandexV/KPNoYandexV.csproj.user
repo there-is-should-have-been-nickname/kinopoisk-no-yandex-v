@@ -40,6 +40,9 @@
     <Compile Update="View\StartWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\UpdateActorWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UpdateFilmWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -79,6 +82,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\StartWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UpdateActorWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UpdateFilmWindow.xaml">

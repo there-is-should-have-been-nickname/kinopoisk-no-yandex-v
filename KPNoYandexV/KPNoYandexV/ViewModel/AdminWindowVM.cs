@@ -324,15 +324,15 @@ namespace KPNoYandexV.ViewModel
             {
                 return new BaseCommand((obj) =>
                 {
-                    if (!string.IsNullOrWhiteSpace(CurrentGenreNameUp))
+                    if (!string.IsNullOrWhiteSpace(CurrentActorNameUp))
                     {
                         int Id = 0;
                         using (var db = new KPNoYandexVContext())
                         {
-                            var CurGenre = db.Genres.SingleOrDefault(G => G.Name == CurrentGenreNameUp);
-                            Id = CurGenre.Id;
+                            var CurActor = db.Actors.SingleOrDefault(G => G.LastName == CurrentActorNameUp);
+                            Id = CurActor.Id;
                         }
-                        ViewHelper.WindowInteract<AdminWindow, UpdateGenreWindow>(CurrentWindow, new UpdateGenreWindow(Id));
+                        ViewHelper.WindowInteract<AdminWindow, UpdateActorWindow>(CurrentWindow, new UpdateActorWindow(Id));
                     }
 
                 });
