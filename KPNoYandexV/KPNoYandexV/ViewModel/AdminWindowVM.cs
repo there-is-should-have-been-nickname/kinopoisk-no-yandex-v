@@ -129,6 +129,16 @@ namespace KPNoYandexV.ViewModel
                             db.Films.Remove(CurFilm);
                             db.SaveChanges();
                             MessageBox.Show("Удаление успешно");
+
+                            string Copy = CurrentFilmNameDel;
+                            FilmNamesDel = FilmNamesDel.FindAll(FilmName => FilmName.Content as string != CurrentFilmNameDel);
+                            FilmNamesUp = FilmNamesDel;
+                            if (CurrentFilmNameUp == Copy)
+                            {
+                                CurrentFilmNameUp = "";
+                            }
+                            CurrentFilmNameDel = "";
+                            
                         }
                     }
                     
@@ -223,22 +233,15 @@ namespace KPNoYandexV.ViewModel
                             db.SaveChanges();
                             MessageBox.Show("Удаление успешно");
 
-                            var TempGenreNamesDel = new List<Button>();
-                            foreach (var GenreName in GenreNamesDel)
+                            string Copy = CurrentGenreNameDel;
+                            GenreNamesDel = GenreNamesDel.FindAll(GenreName => GenreName.Content as string != CurrentGenreNameDel);
+                            GenreNamesUp = GenreNamesDel;
+                            if (CurrentGenreNameUp == Copy)
                             {
-                                if (GenreName.Content as string != CurrentGenreNameDel)
-                                {
-                                    TempGenreNamesDel.Add(GenreName);
-                                }
-                                
-                            }
-                            GenreNamesDel = new List<Button>();
-                            foreach (var TGenre in TempGenreNamesDel)
-                            {
-                                GenreNamesDel.Add(TGenre);
+                                CurrentGenreNameUp = "";
                             }
                             CurrentGenreNameDel = "";
-
+                            
 
                         }
                     }

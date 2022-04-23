@@ -1,10 +1,6 @@
 ﻿using KPNoYandexV.Model;
 using KPNoYandexV.ViewModel.Commands;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -54,9 +50,11 @@ namespace KPNoYandexV.Lib
             if (Elem is Actor)
             {
                 btn.Content = $"{(Elem as Actor).FirstName} {(Elem as Actor).LastName}";
-            } else if (Elem is Film) {
+            }
+            else if (Elem is Film)
+            {
                 btn.Content = (Elem as Film).Name;
-            } 
+            }
             else
             {
                 btn.Content = (Elem as Genre).Name;
@@ -67,7 +65,9 @@ namespace KPNoYandexV.Lib
             if (Elem is Actor)
             {
                 btn.CommandParameter = (Elem as Actor).Id;
-            } else if (Elem is Film) {
+            }
+            else if (Elem is Film)
+            {
                 btn.CommandParameter = (Elem as Film).Id;
             }
             else
@@ -78,8 +78,19 @@ namespace KPNoYandexV.Lib
             CurrentList.Add(btn);
         }
 
-        public static void WindowInteract<T, K>(T WindowClose, K WindowShow) 
-            where T : Window 
+        public static void RemoveButton(List<Button> CurrentListDel, List<Button> CurrentListUp, string CurrentNameDel, string CurrentNameUp)
+        {
+            CurrentListDel = CurrentListDel.FindAll(Name => Name.Content as string != CurrentNameDel);
+            CurrentListUp = CurrentListUp.FindAll(Name => Name.Content as string != CurrentNameDel);
+            CurrentNameDel = "";
+            if (CurrentNameUp == CurrentNameDel)
+            {
+                CurrentNameUp = "";
+            }
+        }
+
+        public static void WindowInteract<T, K>(T WindowClose, K WindowShow)
+            where T : Window
             where K : Window
         {
             (WindowShow as Window).Show();
