@@ -16,17 +16,15 @@ using System.Windows.Shapes;
 namespace KPNoYandexV.View
 {
     /// <summary>
-    /// Логика взаимодействия для AdminWindow.xaml
+    /// Логика взаимодействия для UpdateGenreWindow.xaml
     /// </summary>
-    public partial class AdminWindow : Window
+    public partial class UpdateGenreWindow : Window
     {
-        public AdminWindow()
+        public UpdateGenreWindow(int GenreId)
         {
             InitializeComponent();
-
-            var ViewModel = new AdminWindowVM(this);
+            var ViewModel = new UpdateGenreWindowVM(GenreId, this);
             DataContext = ViewModel;
         }
-
     }
 }

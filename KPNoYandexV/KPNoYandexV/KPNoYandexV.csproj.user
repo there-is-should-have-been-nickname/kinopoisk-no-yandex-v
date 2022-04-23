@@ -25,6 +25,9 @@
     <Compile Update="View\FilmWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\GenreAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Genres.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -35,6 +38,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\UpdateFilmWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UpdateGenreWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -57,6 +63,9 @@
     <Page Update="View\FilmWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="View\GenreAddWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Genres.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -67,6 +76,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UpdateFilmWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UpdateGenreWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UserWindow.xaml">

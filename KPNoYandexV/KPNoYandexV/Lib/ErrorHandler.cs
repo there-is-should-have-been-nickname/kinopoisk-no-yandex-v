@@ -32,6 +32,15 @@ namespace KPNoYandexV.Lib
             return "";
         }
 
+        public static string GetGenreErrorMessage(string GenreName)
+        {
+            if (string.IsNullOrWhiteSpace(GenreName))
+            {
+                return "Не задано название жанра";
+            }
+            return "";
+        }
+
         public static void ShowError(string message)
         {
             MessageBox.Show(message); 
