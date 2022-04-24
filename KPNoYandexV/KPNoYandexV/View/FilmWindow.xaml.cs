@@ -21,10 +21,10 @@ namespace KPNoYandexV.View
     /// </summary>
     public partial class FilmWindow : Window
     {
-        public FilmWindow(int FilmId)
+        public FilmWindow(int FilmId, FilmsPageVM ?VM)
         {
             InitializeComponent();
-            var ViewModel = new FilmWindowVM(FilmId);
+            var ViewModel = new FilmWindowVM(FilmId, this, VM);
             DataContext = ViewModel;
 
             foreach (var Act in ViewModel.CurrentActors)
@@ -60,6 +60,15 @@ namespace KPNoYandexV.View
 
                 ActorsStackPanel.Children.Add(Btn);
 
+            }
+        }
+
+        public void RenderGenres(List<Button> GenreNames)
+        {
+            
+            foreach (var GenreName in GenreNames)
+            {
+                GenresStackPanel.Children.Add(GenreName);
             }
         }
     }

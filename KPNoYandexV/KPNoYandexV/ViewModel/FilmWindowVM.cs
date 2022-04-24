@@ -1,4 +1,5 @@
 ﻿using KPNoYandexV.Data;
+using KPNoYandexV.Lib;
 using KPNoYandexV.Model;
 using KPNoYandexV.View;
 using KPNoYandexV.ViewModel.Commands;
@@ -10,6 +11,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace KPNoYandexV.ViewModel
 {
@@ -19,19 +22,28 @@ namespace KPNoYandexV.ViewModel
         private string yearAndCounry;
         private string ratingAndRevNumber;
         private string path;
-        private string genreNames;
+        private List<Button> genreNames;
         private List<Actor> actors = new List<Actor>();
+
+        private FilmWindow currentWindow;
+        private FilmsPageVM parentWindowVM;
 
         public Film CurrentFilm { get { return film; } set { film = value; OnPropertyChanged(); } }
         public string YearAndCounry { get { return yearAndCounry; } set { yearAndCounry = value; OnPropertyChanged(); } }
         public string RatingAndRevNumber { get { return ratingAndRevNumber; } set { ratingAndRevNumber = value; OnPropertyChanged(); } }
         public string Path { get { return path; } set { path = value; OnPropertyChanged(); } }
-        public string GenreNames { get { return genreNames; } set { genreNames = value; OnPropertyChanged(); } }
+        public List<Button> GenreNames { get { return genreNames; } set { genreNames = value; OnPropertyChanged(); } }
         public List<Actor> CurrentActors { get { return actors; } set { actors = value; OnPropertyChanged(); } }
 
-        public FilmWindowVM(int Id)
+        public FilmWindow CurrentWindow { get { return currentWindow; } set { currentWindow = value; OnPropertyChanged(); } }
+        public FilmsPageVM ParentWindowVM { get { return parentWindowVM; } set { parentWindowVM = value; OnPropertyChanged(); } }
+
+        
+        public FilmWindowVM(int Id, FilmWindow window, FilmsPageVM ?parWindow)
         {
-            GenreNames = "Жанры: ";
+            CurrentWindow = window;
+            ParentWindowVM = parWindow;
+            GenreNames = new List<Button>();
             using (KPNoYandexVContext context = new KPNoYandexVContext())
             {
                 CurrentFilm = context.Films.SingleOrDefault(film => film.Id == Id);
@@ -45,19 +57,41 @@ namespace KPNoYandexV.ViewModel
                 List<FilmsGenre> FilmGenres = context.FilmsGenres.Where(filmact => filmact.FilmId == CurrentFilm.Id).ToList();
                 foreach (var FilmGenre in FilmGenres)
                 {
-                    Genre Gen = context.Genres.SingleOrDefault(g => g.Id == FilmGenre.GenreId);
-                    GenreNames += Gen.Name + ", ";
+                    Genre Gen = context.Genres.SingleOrDefault(gen => gen.Id == FilmGenre.GenreId);
+                    var Btn = new Button();
+                    Btn.Width = 70;
+                    Btn.Height = 25;
+                    Btn.Content = Gen.Name;
+                    Btn.Cursor = Cursors.Hand;
+                    Btn.Command = GenreClick;
+                    Btn.CommandParameter = Gen.Id;
+                    
+                    GenreNames.Add(Btn);
                 }
-                if (GenreNames.Length > 2)
-                {
-                    GenreNames = GenreNames.Remove(GenreNames.Length - 2, 2);
-                }
+
+                CurrentWindow.RenderGenres(GenreNames);
 
             }
             DateTime Date = Convert.ToDateTime(CurrentFilm.Year.ToString());
             YearAndCounry = Date.Year.ToString() + ", " + CurrentFilm.Country;
             RatingAndRevNumber = CurrentFilm.Rating + "; отзывов:" + CurrentFilm.ReviewsNumber;
             Path = $"C:\\Users\\ACER\\Desktop\\Projects\\kinopoisk-no-yandex-v\\KPNoYandexV\\KPNoYandexV\\Images\\Posters\\{CurrentFilm.PosterPath}";
+        }
+
+
+
+
+        public BaseCommand GenreClick
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    ViewHelper.WindowInteract<FilmWindow>(CurrentWindow);
+                    ParentWindowVM.ApplyGenreFilter.Execute(obj);
+
+                });
+            }
         }
 
         public BaseCommand ActorOpenClick

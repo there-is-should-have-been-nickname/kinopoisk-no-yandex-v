@@ -52,7 +52,7 @@ namespace KPNoYandexV.ViewModel
                 {
                     List<object> Parameters = obj as List<object>;
                     int Id = Convert.ToInt32(Parameters[0]);
-                    var FilmPage = new FilmWindow(Id);
+                    var FilmPage = new FilmWindow(Id, new FilmsPageVM());
                     FilmPage.Show();
                     Window CurrentWindow = Parameters[1] as Window;
                     CurrentWindow.Close();
