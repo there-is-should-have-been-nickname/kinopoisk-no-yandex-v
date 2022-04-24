@@ -47,6 +47,27 @@ namespace KPNoYandexV.ViewModel
 
         }
 
+        public FilmsPageVM()
+        {
+            CurrentGenre = "Все";
+
+            List<Genre> Genres = new List<Genre>();
+            using (var db = new KPNoYandexVContext())
+            {
+                Films = db.Films.ToList();
+                Genres = db.Genres.ToList();
+            }
+
+            GenresButtons = new List<Button>();
+            AddGenreButton("Все");
+
+            foreach (var CurrentGenre in Genres)
+            {
+                AddGenreButton(CurrentGenre);
+            }
+
+        }
+
         private void AddGenreButton(Genre CurrentGenre)
         {
             var btn = new Button();
@@ -86,7 +107,7 @@ namespace KPNoYandexV.ViewModel
                 return new BaseCommand((obj) =>
                 {
                     int Id = Convert.ToInt32(obj);
-                    var FilmPage = new FilmWindow(Id);
+                    var FilmPage = new FilmWindow(Id, this);
                     FilmPage.Show();
                 });
             }

@@ -27,6 +27,12 @@ namespace KPNoYandexV.ViewModel
         private List<Button> genreNamesDel;
         private string currentGenreNameDel;
 
+        private List<Actor> actors;
+        private List<Button> actorNamesUp;
+        private string currentActorNameUp;
+        private List<Button> actorNamesDel;
+        private string currentActorNameDel;
+
         private AdminWindow currentWindow;
 
         public List<Film> Films { get { return films; } set { films = value; OnPropertyChanged(); } }
@@ -40,6 +46,14 @@ namespace KPNoYandexV.ViewModel
         public string CurrentGenreNameUp { get { return currentGenreNameUp; } set { currentGenreNameUp = value; OnPropertyChanged(); } }
         public List<Button> GenreNamesDel { get { return genreNamesDel; } set { genreNamesDel = value; OnPropertyChanged(); } }
         public string CurrentGenreNameDel { get { return currentGenreNameDel; } set { currentGenreNameDel = value; OnPropertyChanged(); } }
+
+
+        public List<Actor> Actors { get { return actors; } set { actors = value; OnPropertyChanged(); } }
+        public List<Button> ActorNamesUp { get { return actorNamesUp; } set { actorNamesUp = value; OnPropertyChanged(); } }
+        public string CurrentActorNameUp { get { return currentActorNameUp; } set { currentActorNameUp = value; OnPropertyChanged(); } }
+        public List<Button> ActorNamesDel { get { return actorNamesDel; } set { actorNamesDel = value; OnPropertyChanged(); } }
+        public string CurrentActorNameDel { get { return currentActorNameDel; } set { currentActorNameDel = value; OnPropertyChanged(); } }
+
         public AdminWindow CurrentWindow { get { return currentWindow; } set { currentWindow = value; OnPropertyChanged(); } }
         public AdminWindowVM(AdminWindow window) {
             CurrentWindow = window;
@@ -47,11 +61,14 @@ namespace KPNoYandexV.ViewModel
             {
                 Films = db.Films.ToList();
                 Genres = db.Genres.ToList();
+                Actors = db.Actors.ToList();
             }
             FilmNamesUp = new List<Button>();
             FilmNamesDel = new List<Button>();
             GenreNamesUp = new List<Button>();
             GenreNamesDel = new List<Button>();
+            ActorNamesUp = new List<Button>();
+            ActorNamesDel = new List<Button>();
 
             foreach (var CurrentFilm in Films)
             {
@@ -64,12 +81,19 @@ namespace KPNoYandexV.ViewModel
                 ViewHelper.AddGenreName(CurrentGenre, GenreNamesUp, ApplyGenreNameUp);
                 ViewHelper.AddGenreName(CurrentGenre, GenreNamesDel, ApplyGenreNameDel);
             }
+            foreach (var CurrentActor in Actors)
+            {
+                ViewHelper.AddActorName(CurrentActor, ActorNamesUp, ApplyActorNameUp);
+                ViewHelper.AddActorName(CurrentActor, ActorNamesDel, ApplyActorNameDel);
+            }
 
 
             CurrentFilmNameUp = "";
             CurrentFilmNameDel = "";
             CurrentGenreNameUp = "";
             CurrentGenreNameDel = "";
+            CurrentActorNameUp = "";
+            CurrentActorNameDel = "";
         }
 
         public BaseCommand OpenAddFilmWindow
@@ -279,6 +303,110 @@ namespace KPNoYandexV.ViewModel
                     {
                         var CurGenre = db.Genres.SingleOrDefault(G => G.Id == Id);
                         CurrentGenreNameDel = CurGenre.Name;
+                    }
+                });
+            }
+        }
+
+        public BaseCommand OpenAddActorWindow
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    ViewHelper.WindowInteract<AdminWindow, ActorAddWindow>(CurrentWindow, new ActorAddWindow());
+                });
+            }
+        }
+        public BaseCommand OpenUpdateActorWindow
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    if (!string.IsNullOrWhiteSpace(CurrentActorNameUp))
+                    {
+                        int Id = 0;
+                        using (var db = new KPNoYandexVContext())
+                        {
+                            var CurActor = db.Actors.SingleOrDefault(G => G.LastName == CurrentActorNameUp);
+                            Id = CurActor.Id;
+                        }
+                        ViewHelper.WindowInteract<AdminWindow, UpdateActorWindow>(CurrentWindow, new UpdateActorWindow(Id));
+                    }
+
+                });
+            }
+        }
+
+        public BaseCommand RemoveActor
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    if (!string.IsNullOrWhiteSpace(CurrentActorNameDel))
+                    {
+                        using (var db = new KPNoYandexVContext())
+                        {
+                            var CurActor = db.Actors.SingleOrDefault(A => A.LastName == CurrentActorNameDel);
+
+                            var ExistedFilms = db.FilmsActors.Where(FG => FG.ActorId == CurActor.Id);
+                            foreach (var FilmActor in ExistedFilms)
+                            {
+                                db.FilmsActors.Remove(FilmActor);
+                            }
+                            db.SaveChanges();
+                            db.Actors.Remove(CurActor);
+                            db.SaveChanges();
+                            MessageBox.Show("Удаление успешно");
+
+                            string Copy = CurrentActorNameDel;
+                            ActorNamesDel = ActorNamesDel.FindAll(ActorName => ActorName.Content as string != CurrentActorNameDel);
+                            ActorNamesUp = ActorNamesDel;
+                            if (CurrentActorNameUp == Copy)
+                            {
+                                CurrentActorNameUp = "";
+                            }
+                            CurrentActorNameDel = "";
+
+
+                        }
+                    }
+
+                });
+            }
+        }
+
+        public BaseCommand ApplyActorNameUp
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    int Id = Convert.ToInt32(obj);
+
+                    using (var db = new KPNoYandexVContext())
+                    {
+                        var CurActor = db.Actors.SingleOrDefault(A => A.Id == Id);
+                        CurrentActorNameUp = CurActor.LastName;
+                    }
+                });
+            }
+        }
+
+        public BaseCommand ApplyActorNameDel
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    int Id = Convert.ToInt32(obj);
+
+                    using (var db = new KPNoYandexVContext())
+                    {
+                        var CurActor = db.Actors.SingleOrDefault(G => G.Id == Id);
+                        CurrentActorNameDel = CurActor.LastName;
                     }
                 });
             }

@@ -41,6 +41,23 @@ namespace KPNoYandexV.Lib
             return "";
         }
 
+        public static string GetActorErrorMessage(string ActorFirstName, string ActorLastName, string ActorCountry)
+        {
+            if (string.IsNullOrWhiteSpace(ActorFirstName))
+            {
+                return "Не задано имя актера";
+            }
+            else if (string.IsNullOrWhiteSpace(ActorLastName))
+            {
+                return "Не задана фамилия актера";
+            }
+            else if (string.IsNullOrWhiteSpace(ActorCountry))
+            {
+                return "Не задана страна актера";
+            }
+            return "";
+        }
+
         public static void ShowError(string message)
         {
             MessageBox.Show(message); 

@@ -205,12 +205,16 @@ namespace KPNoYandexV.ViewModel
                     CurrentFilm.Country = FilmCountry;
                     CurrentFilm.Rating = Convert.ToDouble(FilmRating);
                     CurrentFilm.ReviewsNumber = Convert.ToInt32(FilmNumberReviews);
-                    string DbFilePath = FilmPath.Split("\\")[^1];
-                    if (DbFilePath != FilmPath)
-                    {
-                        File.Copy(FilmPath, $"C:\\Users\\ACER\\Desktop\\Projects\\kinopoisk-no-yandex-v\\KPNoYandexV\\KPNoYandexV\\Images\\Posters\\{DbFilePath}", true);
 
-                        CurrentFilm.PosterPath = DbFilePath;
+                    if (!string.IsNullOrWhiteSpace(FilmPath))
+                    {
+                        string DbFilePath = FilmPath.Split("\\")[^1];
+                        if (DbFilePath != FilmPath)
+                        {
+                            File.Copy(FilmPath, $"C:\\Users\\ACER\\Desktop\\Projects\\kinopoisk-no-yandex-v\\KPNoYandexV\\KPNoYandexV\\Images\\Posters\\{DbFilePath}", true);
+
+                            CurrentFilm.PosterPath = DbFilePath;
+                        }
                     }
 
                        

@@ -40,6 +40,22 @@ namespace KPNoYandexV.Lib
             GenreNames.Add(btn);
         }
 
+        public static void AddActorName(Actor CurrentActor, List<Button> ActorNames, BaseCommand CurrentCommand)
+        {
+            var btn = new Button();
+            btn.Width = 90;
+            btn.Height = 30;
+            btn.FontFamily = new System.Windows.Media.FontFamily("Consolas");
+            btn.FontSize = 10;
+            btn.Content = CurrentActor.LastName;
+            btn.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+            btn.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+            btn.Command = CurrentCommand;
+            btn.CommandParameter = CurrentActor.Id;
+
+            ActorNames.Add(btn);
+        }
+
         public static void AddButtons<T>(T Elem, List<Button> CurrentList, BaseCommand CurrentCommand)
         {
             var btn = new Button();
@@ -76,17 +92,6 @@ namespace KPNoYandexV.Lib
             }
 
             CurrentList.Add(btn);
-        }
-
-        public static void RemoveButton(List<Button> CurrentListDel, List<Button> CurrentListUp, string CurrentNameDel, string CurrentNameUp)
-        {
-            CurrentListDel = CurrentListDel.FindAll(Name => Name.Content as string != CurrentNameDel);
-            CurrentListUp = CurrentListUp.FindAll(Name => Name.Content as string != CurrentNameDel);
-            CurrentNameDel = "";
-            if (CurrentNameUp == CurrentNameDel)
-            {
-                CurrentNameUp = "";
-            }
         }
 
         public static void WindowInteract<T, K>(T WindowClose, K WindowShow)

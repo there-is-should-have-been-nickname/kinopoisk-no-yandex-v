@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="View\ActorAddWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\Actors.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -37,6 +40,9 @@
     <Compile Update="View\StartWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\UpdateActorWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\UpdateFilmWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -45,6 +51,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="View\ActorAddWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="View\Actors.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -73,6 +82,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\StartWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UpdateActorWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\UpdateFilmWindow.xaml">
