@@ -22,38 +22,26 @@
             <ColumnDefinition Width="0.1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Button Grid.Column="1" Grid.Row="1" Content="Назад"  Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="120" Command="{Binding BackClick}" Margin="0,0,546,88" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Grid.Column="1" Grid.Row="1" Content="Назад"  Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="120" Command="{Binding BackClick}" Margin="10,10,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Button Grid.Column="1" Grid.Row="1" Content="Добавить фильм" HorizontalAlignment="Center" VerticalAlignment="Top" Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="280" Command="{Binding OpenAddFilmWindow}"/>
         <Button Grid.Column="1" Grid.Row="1" Content="Изменить фильм" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="150" Margin="183,35,0,0" Command="{Binding OpenUpdateFilmWindow}"/>
         <Button Grid.Column="1" Grid.Row="1" Content="Удалить фильм" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="150" Margin="183,78,0,0" Command="{Binding RemoveFilm}"/>
 
-        <ComboBox Grid.Row="1" Grid.Column="1" Width="120" Height="30" Margin="353,35,193,53" ItemsSource="{Binding FilmNamesUp}" Text="{Binding CurrentFilmNameUp}">
-
-        </ComboBox>
-        <ComboBox Grid.Row="1" Grid.Column="1" Width="120" Height="30" Margin="353,77,193,11" ItemsSource="{Binding FilmNamesDel}" Text="{Binding CurrentFilmNameDel}">
-
-        </ComboBox>
+        <ComboBox Grid.Row="1" Grid.Column="1" Margin="338,34,193,46" ItemsSource="{Binding FilmNamesUp}" Text="{Binding CurrentFilmNameUp}"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" Margin="338,77,193,3" ItemsSource="{Binding FilmNamesDel}" Text="{Binding CurrentFilmNameDel}"/>
 
         <Button Grid.Column="1" Grid.Row="3" Content="Добавить жанр" HorizontalAlignment="Center" VerticalAlignment="Top" Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="280" Command="{Binding OpenAddGenreWindow}"/>
         <Button Grid.Column="1" Grid.Row="3" Content="Изменить жанр" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="150" Margin="183,35,0,0" Command="{Binding OpenUpdateGenreWindow}"/>
         <Button Grid.Column="1" Grid.Row="3" Content="Удалить жанр" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="150" Margin="183,78,0,0" Command="{Binding RemoveGenre}"/>
 
-        <ComboBox Grid.Row="3" Grid.Column="1" Width="120" Height="30" Margin="353,35,193,53" ItemsSource="{Binding GenreNamesUp}" Text="{Binding CurrentGenreNameUp}">
-
-        </ComboBox>
-        <ComboBox Grid.Row="3" Grid.Column="1" Width="120" Height="30" Margin="353,77,193,11" ItemsSource="{Binding GenreNamesDel}" Text="{Binding CurrentGenreNameDel}">
-
-        </ComboBox>
+        <ComboBox Grid.Row="3" Grid.Column="1" Margin="338,34,193,46" ItemsSource="{Binding GenreNamesUp}" Text="{Binding CurrentGenreNameUp}"/>
+        <ComboBox Grid.Row="3" Grid.Column="1" Margin="338,77,193,3" ItemsSource="{Binding GenreNamesDel}" Text="{Binding CurrentGenreNameDel}"/>
 
         <Button Grid.Column="1" Grid.Row="5" Content="Добавить актера" HorizontalAlignment="Center" VerticalAlignment="Top" Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="280" Command="{Binding OpenAddActorWindow}"/>
         <Button Grid.Column="1" Grid.Row="5" Content="Изменить актера" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="150" Margin="183,35,0,0" Command="{Binding OpenUpdateActorWindow}"/>
         <Button Grid.Column="1" Grid.Row="5" Content="Удалить актера" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="Hand" FontFamily="Consolas" FontSize="16" Height="30" Width="150" Margin="183,78,0,0" Command="{Binding RemoveActor}"/>
 
-        <ComboBox Grid.Row="5" Grid.Column="1" Width="120" Height="30" Margin="353,35,193,53" ItemsSource="{Binding ActorNamesUp}" Text="{Binding CurrentActorNameUp}">
-
-        </ComboBox>
-        <ComboBox Grid.Row="5" Grid.Column="1" Width="120" Height="30" Margin="353,77,193,11" ItemsSource="{Binding ActorNamesDel}" Text="{Binding CurrentActorNameDel}">
-
-        </ComboBox>
+        <ComboBox Grid.Row="5" Grid.Column="1" Margin="338,35,193,45" ItemsSource="{Binding ActorNamesUp}" Text="{Binding CurrentActorNameUp}"/>
+        <ComboBox Grid.Row="5" Grid.Column="1" Margin="338,78,193,2" ItemsSource="{Binding ActorNamesDel}" Text="{Binding CurrentActorNameDel}"/>
     </Grid>
 </Window>

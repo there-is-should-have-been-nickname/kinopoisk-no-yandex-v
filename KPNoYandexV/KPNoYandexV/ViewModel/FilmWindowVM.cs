@@ -62,6 +62,7 @@ namespace KPNoYandexV.ViewModel
                     Btn.Width = 70;
                     Btn.Height = 25;
                     Btn.Content = Gen.Name;
+                    Btn.Margin = new Thickness(0, 0, 10, 0);
                     Btn.Cursor = Cursors.Hand;
                     Btn.Command = GenreClick;
                     Btn.CommandParameter = Gen.Id;
