@@ -93,6 +93,17 @@ namespace KPNoYandexV.ViewModel
             }
         }
 
+        public BaseCommand BackClick
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    ViewHelper.WindowInteract<UpdateGenreWindow, AdminWindow>(CurrentWindow, new AdminWindow());
+                });
+            }
+        }
+
         public BaseCommand UpdateGenreClick
         {
             get

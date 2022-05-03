@@ -150,6 +150,17 @@ namespace KPNoYandexV.ViewModel
             }
         }
 
+        public BaseCommand BackClick
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    ViewHelper.WindowInteract<FilmAddWindow, AdminWindow>(CurrentWindow, new AdminWindow());
+                });
+            }
+        }
+
         public BaseCommand AddFilmClick
         {
             get

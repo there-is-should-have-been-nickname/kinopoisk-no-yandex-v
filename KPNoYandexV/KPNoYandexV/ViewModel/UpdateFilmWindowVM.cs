@@ -186,6 +186,17 @@ namespace KPNoYandexV.ViewModel
             }
         }
 
+        public BaseCommand BackClick
+        {
+            get
+            {
+                return new BaseCommand((obj) =>
+                {
+                    ViewHelper.WindowInteract<UpdateFilmWindow, AdminWindow>(CurrentWindow, new AdminWindow());
+                });
+            }
+        }
+
         public BaseCommand UpdateFilmClick
         {
             get
