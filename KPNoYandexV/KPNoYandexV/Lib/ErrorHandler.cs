@@ -29,6 +29,32 @@ namespace KPNoYandexV.Lib
             {
                 return "Не задан рейтинг фильма";
             }
+            int result;
+            bool IsInt = int.TryParse(FilmYear, out result);
+            if (IsInt)
+            {
+                if (result < 0)
+                {
+                    return "Год не может быть отрицательным";
+                }
+            } else
+            {
+                return "Год не является целым числом";
+            }
+
+            double result2;
+            bool IsDouble = double.TryParse(FilmRating, out result2);
+            if (IsDouble)
+            {
+                if (result2 < 0.0 || result2 > 5.0)
+                {
+                    return "Рейтинг должен быть вещественным числом от 0 до 5";
+                }
+            } else
+            {
+                return "Рейтинг не является вещественным числом";
+            }
+
             return "";
         }
 
