@@ -67,7 +67,7 @@ namespace KPNoYandexV.Lib
             return "";
         }
 
-        public static string GetActorErrorMessage(string ActorFirstName, string ActorLastName, string ActorCountry)
+        public static string GetActorErrorMessage(string ActorFirstName, string ActorLastName, string ActorCountry, string ActorDateBirth)
         {
             if (string.IsNullOrWhiteSpace(ActorFirstName))
             {
@@ -81,6 +81,13 @@ namespace KPNoYandexV.Lib
             {
                 return "Не задана страна актера";
             }
+            DateTime Temp = DateTime.Now;
+            bool IsDateTime = DateTime.TryParse(ActorDateBirth, out Temp);
+            if (!IsDateTime)
+            {
+                return "Неверный формат даты";
+            }
+
             return "";
         }
 

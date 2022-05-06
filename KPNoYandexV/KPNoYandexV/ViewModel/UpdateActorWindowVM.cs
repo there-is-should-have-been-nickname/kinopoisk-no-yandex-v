@@ -141,7 +141,7 @@ namespace KPNoYandexV.ViewModel
             {
                 return new BaseCommand((obj) =>
                 {
-                    var ErrorMessage = ErrorHandler.GetActorErrorMessage(ActorFirstName, ActorLastName, ActorCountry);
+                    var ErrorMessage = ErrorHandler.GetActorErrorMessage(ActorFirstName, ActorLastName, ActorCountry, ActorDateBirth);
                     if (!string.IsNullOrEmpty(ErrorMessage))
                     {
                         ErrorHandler.ShowError(ErrorMessage);
